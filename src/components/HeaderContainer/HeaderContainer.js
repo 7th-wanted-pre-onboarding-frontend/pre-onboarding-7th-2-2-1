@@ -1,16 +1,29 @@
 import React from 'react';
 
-import { StyledHeaderContainer, StyledUserInfo } from './HeaderContainer.style';
+import { AiOutlineBell } from '@react-icons/all-files/ai/AiOutlineBell';
+import { AiOutlineSetting } from '@react-icons/all-files/ai/AiOutlineSetting';
+import defaultProfile from '../../assets/image/defaultProfile.jpeg';
+import {
+  StyledAvatar,
+  StyledHeaderContainer,
+  StyledUserInfo
+} from './HeaderContainer.style';
+
+import Typography from '../Typography/Typography';
+
+const username = '김정현';
 
 export default function HeaderContainer() {
   return (
     <StyledHeaderContainer>
       <StyledUserInfo>
-        <div>Avatar</div>
-        <div>username</div>
+        <StyledAvatar src={defaultProfile} alt='user-profile' />
+        <Typography size='lg' variant='default'>
+          {username}님
+        </Typography>
       </StyledUserInfo>
-      <div>setting</div>
-      <div>alret</div>
+      <AiOutlineSetting size='22px' />
+      <AiOutlineBell size='22px' />
     </StyledHeaderContainer>
   );
 }
