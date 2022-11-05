@@ -1,19 +1,25 @@
 const defaultTheme = {
-  textColor: {
-    default: '#000000',
-    accent: '#FFFFFF'
+  color: {
+    default: '#3A474E',
+    accent: '#586CF5',
+    label: '#94A2AD'
+  },
+  bnColor: {
+    default: '#FFFFFF'
   },
   btnColor: {
-    default: '#D9D9D9',
-    active: '#000000',
-    accent: '#0094FF'
+    default: '#FFFFFF',
+    active: '#EDEFF1'
   },
   bgColor: {
-    default: 'white',
-    accent: '#0094FF'
+    default: '#F6F7F8'
   },
   border: {
-    default: '#000000'
+    default: '#EDEFF1',
+    button: '#D1D8DC'
+  },
+  tipColor: {
+    default: '#E5F4FD'
   }
 };
 
