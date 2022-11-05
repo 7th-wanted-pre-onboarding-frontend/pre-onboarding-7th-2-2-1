@@ -12,5 +12,12 @@ export const StyledHeaderContainer = styled.div`
 
 export const StyledUserInfo = styled.div`
   display: flex;
+  align-items: center;
   gap: 10px;
+`;
+
+export const StyledAvatar = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 99%;
 `;
