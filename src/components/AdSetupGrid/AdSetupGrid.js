@@ -33,9 +33,9 @@ export default function AdSetupGrid() {
           return {
             budget: valuse.budget || budget,
             report: {
-              convValue: valuse.convValue || report.convValue,
-              cost: valuse.cost || report.cost,
-              roas: valuse.roas || report.roas
+              convValue: valuse.report.convValue || report.convValue,
+              cost: valuse.report.cost || report.cost,
+              roas: valuse.report.roas || report.roas
             },
             status: valuse.status || status,
             title,
