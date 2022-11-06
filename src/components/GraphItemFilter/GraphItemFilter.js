@@ -18,7 +18,7 @@ export default function GraphItemFilter() {
     <Dropdown size='sm'>
       <StyledItemWrapper>
         <StyledItemDot />
-        <Typography size='xlg' variant='default'>
+        <Typography size='lg' variant='default'>
           {selectedItem}
         </Typography>
       </StyledItemWrapper>

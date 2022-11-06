@@ -1,33 +1,41 @@
 import React from 'react';
+
+import styled from 'styled-components';
+
 import useDropdown from '../../utils/hooks/useDropdown';
 
 import Dropdown from '../Dropdown/Dropdown';
-import TitleList from '../TitleList/TitleList';
+import AdItemList from '../ProgressList/ProgressList';
 import Typography from '../Typography/Typography';
 
-import { BANNER_LIST } from '../../utils/constants/constList';
+import { PROGRESS } from '../../utils/constants/constList';
 
 import { StyledDropdownButton } from '../SidebarContainer/SidebarContainer.style';
-import { StyledItemWrapper, StyledTitleDot } from './GraphTitleFilter.style';
 
-export default function GraphTitleFilter() {
+export default function AdSetupFilter() {
   const { selectedItem, handleSelectBoxToggle, handleSelectItem, isToggled } =
-    useDropdown('ROAS');
+    useDropdown('전체 광고');
 
   return (
     <Dropdown size='sm'>
-      <StyledItemWrapper>
-        <StyledTitleDot />
+      <StyledAdItemWrapper>
         <Typography size='lg' variant='default'>
           {selectedItem}
         </Typography>
-      </StyledItemWrapper>
+      </StyledAdItemWrapper>
       <Typography size='xlg' variant='default'>
         <StyledDropdownButton onClick={handleSelectBoxToggle} />
       </Typography>
       {isToggled && (
-        <TitleList list={BANNER_LIST} handleSelectItem={handleSelectItem} />
+        <AdItemList list={PROGRESS} handleSelectItem={handleSelectItem} />
       )}
     </Dropdown>
   );
 }
+
+const StyledAdItemWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+`;
