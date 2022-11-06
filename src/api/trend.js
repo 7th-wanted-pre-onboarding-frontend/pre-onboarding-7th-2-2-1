@@ -1,8 +1,10 @@
+import trendData from './data/trendData.json';
+
 const TREND_API = {
   get() {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(fetch('http://localhost:3000/data/trendData.json'));
+        resolve(trendData);
       }, 1000);
     });
   }
