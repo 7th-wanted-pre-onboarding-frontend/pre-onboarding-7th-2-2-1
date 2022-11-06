@@ -9,11 +9,11 @@ export default function TitleList(props) {
 
   return (
     <StyledTitleList>
-      {list.map(({ id, title }) => (
+      {list.map(({ id, title, name }) => (
         <StyledTitle
           key={id}
           type='button'
-          onClick={() => handleSelectItem(title)}
+          onClick={() => handleSelectItem({ title, name })}
         >
           <Typography size='lg'>{title}</Typography>
         </StyledTitle>

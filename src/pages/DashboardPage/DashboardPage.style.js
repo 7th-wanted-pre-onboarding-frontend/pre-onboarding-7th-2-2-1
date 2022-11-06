@@ -16,9 +16,3 @@ export const StyledTitle = styled.div`
   height: 80px;
   padding: 25px 40px;
 `;
-
-export const StyledDatePicker = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;

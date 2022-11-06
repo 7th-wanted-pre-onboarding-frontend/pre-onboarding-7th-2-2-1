@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import filterState from '../../store/filters';
+
 import useDropdown from '../../utils/hooks/useDropdown';
 
 import Dropdown from '../Dropdown/Dropdown';
@@ -12,14 +15,30 @@ import { StyledItemWrapper, StyledItemDot } from './GraphItemFilter.style';
 
 export default function GraphItemFilter() {
   const { selectedItem, handleSelectBoxToggle, handleSelectItem, isToggled } =
-    useDropdown('선택');
+    useDropdown({
+      title: '선택',
+      name: null
+    });
+  const [filter, setFilter] = useRecoilState(filterState);
+
+  useEffect(() => {
+    setFilter((state) => ({
+      ...state,
+      dashboardItem: {
+        ...state.dashboardItem,
+        second: {
+          ...selectedItem
+        }
+      }
+    }));
+  }, [selectedItem.title]);
 
   return (
     <Dropdown size='sm'>
       <StyledItemWrapper>
         <StyledItemDot />
         <Typography size='lg' variant='default'>
-          {selectedItem}
+          {filter.dashboardItem.second.title}
         </Typography>
       </StyledItemWrapper>
       <Typography size='xlg' variant='default'>

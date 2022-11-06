@@ -8,8 +8,8 @@ export default function useDropdown(initailState) {
     setIsToggled((currentState) => !currentState);
   };
 
-  const handleSelectItem = (service) => {
-    setSelectedItem(service);
+  const handleSelectItem = (item) => {
+    setSelectedItem(item);
     setIsToggled((currentState) => !currentState);
   };
 
