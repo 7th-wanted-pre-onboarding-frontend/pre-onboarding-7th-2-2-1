@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useDropdown from '../../utils/hooks/useDropdown';
 
 import Dropdown from '../Dropdown/Dropdown';
@@ -13,6 +13,10 @@ import { StyledItemWrapper } from './GraphDateFilter.style';
 export default function GraphDateFilter() {
   const { selectedItem, handleSelectBoxToggle, handleSelectItem, isToggled } =
     useDropdown('주간');
+
+  useEffect(() => {
+    console.log('selectedItem:', selectedItem);
+  }, [selectedItem]);
 
   return (
     <Dropdown size='mmd'>

@@ -49,7 +49,7 @@ export const DATE_LIST = [
   },
   {
     id: 2,
-    name: '야간'
+    name: '일별'
   }
 ];
 
