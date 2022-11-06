@@ -55,9 +55,7 @@ export default function SidebarContainer() {
             <Typography size='xlg' variant='default'>
               <StyledDropdownButton onClick={handleSelectBoxToggle} />
             </Typography>
-            {isToggled && (
-              <ServiceList handleSelectService={handleSelectItem} />
-            )}
+            {isToggled && <ServiceList handleSelectItem={handleSelectItem} />}
           </Dropdown>
         </StyledSidebarItem>
         <StyledSidebarItem>
