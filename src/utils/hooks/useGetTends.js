@@ -16,7 +16,6 @@ export default function useGetTends() {
         .then((data) => setTrendData(data.report.daily));
       setIsLoading(true);
     };
-
     getTrendData();
   }, []);
 

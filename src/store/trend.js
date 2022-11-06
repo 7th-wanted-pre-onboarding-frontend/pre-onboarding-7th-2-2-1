@@ -7,16 +7,26 @@ import {
 import Trend from '../utils/types/trend';
 import TrendBanner from '../utils/types/trendBanner';
 import filterState from './filters';
+import formatData from '../utils/formatDate';
 
-function filterDateTrends(trends, start, end) {
+function filterDateTrends(trends, from, to) {
   return trends
-    .filter(({ date }) => date >= start && date <= end)
+    .filter(
+      ({ date }) =>
+        new Date(formatData(new Date(date))) >=
+          new Date(formatData(new Date(from))) &&
+        new Date(formatData(new Date(date))) <=
+          new Date(formatData(new Date(to)))
+    )
     .map((item) => new Trend(item));
 }
 
-function avgToTrends(trends, start, end, diffDate) {
+function avgToTrends(trends, from, to, diffDate) {
   return trends
-    .filter(({ date }) => date >= start && date <= end)
+    .filter(
+      ({ date }) =>
+        new Date(date) >= new Date(from) && new Date(date) <= new Date(to)
+    )
     .reduce(
       (acc, cur) => {
         const trend = new Trend(cur);
@@ -59,10 +69,17 @@ export const trendChartData = selector({
   key: 'trendChartData',
   get: ({ get }) => {
     const trendData = get(trendState);
-    const {
-      dashboardItem: { first, second },
-      date: { start, end }
-    } = get(filterState);
+    const { dashboardItem, date } = get(filterState);
+
+    if (date?.from === undefined || date?.to === undefined) {
+      return undefined;
+    }
+
+    const { from, to } = date;
+    const { first, second } = dashboardItem;
+
+    const formatedFrom = formatData(from);
+    const formatedTo = formatData(to);
 
     const series = [];
 
@@ -73,7 +90,7 @@ export const trendChartData = selector({
     };
 
     const category = [];
-    const filterdTrend = filterDateTrends(trendData, start, end);
+    const filterdTrend = filterDateTrends(trendData, formatedFrom, formatedTo);
 
     filterdTrend.forEach((item) => {
       seriesA.data.push(item[first.name]);
@@ -93,8 +110,8 @@ export const trendChartData = selector({
       series.push(seriesB);
     }
 
-    filterdTrend.forEach(({ date }) =>
-      category.push(getFormatDate(new Date(date)))
+    filterdTrend.forEach((data) =>
+      category.push(getFormatDate(new Date(data.date)))
     );
 
     return { series, category };
@@ -106,13 +123,25 @@ export const filterdTrends = selector({
   get: ({ get }) => {
     const trendData = get(trendState);
 
-    const {
-      date: { start, end }
-    } = get(filterState);
+    // const {
+    //   date: { from, to }
+    // } = get(filterState);
 
-    const diffDate = getDateDiff(start, end);
+    const { date } = get(filterState);
 
-    const { prevEnd, prevStart, prevDiffDate } = calculatePrevDate(start);
+    if (date?.from === undefined || date?.to === undefined) {
+      return undefined;
+    }
+
+    const { from, to } = date;
+
+    const formatedFrom = formatData(from);
+    const formatedTo = formatData(to);
+
+    const diffDate = getDateDiff(formatedFrom, formatedTo);
+
+    const { prevEnd, prevStart, prevDiffDate } =
+      calculatePrevDate(formatedFrom);
 
     const previousTrend = avgToTrends(
       trendData,
@@ -120,7 +149,7 @@ export const filterdTrends = selector({
       prevEnd,
       prevDiffDate
     );
-    const trend = avgToTrends(trendData, start, end, diffDate);
+    const trend = avgToTrends(trendData, formatedFrom, formatedTo, diffDate);
 
     const avgPrevTrend = new TrendBanner(previousTrend).getEntreis();
     const avgTrend = new TrendBanner(trend).getEntreis();
