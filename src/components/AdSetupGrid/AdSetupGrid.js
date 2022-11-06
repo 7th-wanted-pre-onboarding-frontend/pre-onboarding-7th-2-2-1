@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
@@ -28,19 +27,25 @@ export default function AdSetupGrid() {
   }, []);
 
   const adListValuesHanlder = (targetId, valuse) => {
-    const newListArry = adList.map((obj) => {
-      if (obj.id === targetId) {
-        obj.budget = valuse.budget;
-        obj.report.convValue = valuse.convValue;
-        obj.report.cost = valuse.cost;
-        obj.report.roas = valuse.roas;
-        obj.status = valuse.status;
-        obj.title = valuse.title;
-        return obj;
+    const newListArry = adList.map(
+      ({ id, budget, report, status, title, endDate, startDate }) => {
+        if (id === targetId) {
+          return {
+            budget: valuse.budget || budget,
+            report: {
+              convValue: valuse.convValue || report.convValue,
+              cost: valuse.cost || report.cost,
+              roas: valuse.roas || report.roas
+            },
+            status: valuse.status || status,
+            title,
+            endDate,
+            startDate
+          };
+        }
+        return { budget, report, status, title, endDate, startDate };
       }
-      return obj;
-    });
-
+    );
     setAdList(newListArry);
   };
 
