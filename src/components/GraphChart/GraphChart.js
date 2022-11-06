@@ -1,24 +1,19 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import { trendChartData } from '../../store/trend';
 
 export default function GraphChart() {
+  const chartData = useRecoilValue(trendChartData);
+
   return (
     <StyledGraphChart>
       <StyledChartWrapper>
         <Chart
           height='280px'
           type='line'
-          series={[
-            {
-              name: 'hello',
-              data: [1, 2, 3, 4, 5, 6, 7]
-            },
-            {
-              name: 'asdasd',
-              data: [2, 3, 4, 5, 12, 7, 8]
-            }
-          ]}
+          series={chartData.series}
           options={{
             chart: {
               type: 'line',
@@ -33,26 +28,21 @@ export default function GraphChart() {
               curve: 'smooth'
             },
             xaxis: {
-              type: 'datetime',
-              categories: [
-                '2022-02-01',
-                '2022-02-02',
-                '2022-02-03',
-                '2022-02-04',
-                '2022-02-05',
-                '2022-02-06'
-              ]
+              type: 'string',
+              categories: chartData.category
             },
             yaxis: [
               {
                 title: {
-                  text: 'ROAS'
+                  text: chartData.series[0].title
                 }
               },
               {
+                show: chartData.series.length >= 2 && true,
                 opposite: true,
                 title: {
-                  text: '노출 수'
+                  text:
+                    chartData.series.length >= 2 && chartData.series[1].title
                 }
               }
             ]
