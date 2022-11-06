@@ -11,9 +11,6 @@ import AdItem from '../AdItem/AdItem';
 import AdListSkeleton from '../Skeleton/AdListSkeleton/AdListSkeleton';
 
 export default function AdSetupGrid() {
-  const handleInputChange = ({ name, value }) => {
-    console.log(name, value);
-  };
   const [isLoading, setIsLoading] = useState(false);
   const [adList, setAdList] = useRecoilState(adListState);
   const [adListType] = useRecoilState(adListTypeState);
@@ -44,11 +41,7 @@ export default function AdSetupGrid() {
   return (
     <StyledAdSetupGrid>
       {filterList.map((item) => (
-        <AdItem
-          key={item.id}
-          item={item}
-          handleInputChange={handleInputChange}
-        />
+        <AdItem key={item.id} item={item} />
       ))}
     </StyledAdSetupGrid>
   );

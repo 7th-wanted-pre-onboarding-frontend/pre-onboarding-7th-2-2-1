@@ -1,48 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
+import { DayPicker } from 'react-day-picker';
+import ko from 'date-fns/locale/ko';
+import filterState from '../../store/filters';
+import './DayPicker.css';
 
-import styled from 'styled-components';
+export default function DashboardDataPicker({ setIsToggle }) {
+  const [filters, setFilters] = useRecoilState(filterState);
+  const [isClicked, setIsClicked] = useState(false);
+  const handleSetFilters = (data) => {
+    setFilters({ ...filters, date: data });
+    setIsClicked(true);
+  };
 
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import useDateFilter from '../../utils/hooks/useDateFilter';
-
-export default function DashboardDataPicker() {
-  const { filters, setStartDate, setEndDate } = useDateFilter();
+  useEffect(() => {
+    if (
+      filters.date?.from !== undefined &&
+      filters.date?.to !== undefined &&
+      isClicked
+    ) {
+      setIsToggle(false);
+    }
+    setIsClicked(false);
+  }, [filters]);
 
   return (
-    <StyledDatePicker>
-      <StyledDateInput
-        selected={new Date(filters.date.start)}
-        selectsStart
-        endDate={new Date(filters.date.end)}
-        onChange={(date) => setStartDate(date)}
-      />
-      <div>~</div>
-      <StyledDateInput
-        selected={new Date(filters.date.end)}
-        selectsEnd
-        startDate={new Date(filters.date.start)}
-        onChange={(date) => setEndDate(date)}
-      />
-    </StyledDatePicker>
+    <DayPicker
+      locale={ko}
+      defaultMonth={new Date(2022, 1)}
+      mode='range'
+      selected={filters.date}
+      onSelect={handleSetFilters}
+    />
   );
 }
-
-const StyledDatePicker = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const StyledDateInput = styled(DatePicker)`
-  border: none;
-  width: 80px;
-  background-color: ${(props) => props.theme.bnColor};
-  border-radius: 10px;
-  padding: 5px;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 16.41px;
-  cursor: pointer;
-`;

@@ -12,9 +12,8 @@ export default function StatusBannerList() {
 
   return (
     <StyledStatusBannerList>
-      {trends.map((item) => (
-        <BannerItem key={item.id} item={item} />
-      ))}
+      {trends !== undefined &&
+        trends.map((item) => <BannerItem key={item.id} item={item} />)}
     </StyledStatusBannerList>
   );
 }
