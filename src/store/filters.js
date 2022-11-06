@@ -20,6 +20,7 @@ const initialState = {
     }
   },
   dashboardDate: '일별',
+  scrollValue: 1,
   adSetup: PROGRESS[0].title
 };
 
