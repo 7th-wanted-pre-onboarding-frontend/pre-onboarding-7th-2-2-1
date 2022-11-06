@@ -11,9 +11,7 @@ export default function useGetTends() {
 
   useEffect(() => {
     const getTrendData = async () => {
-      TREND_API.get()
-        .then((res) => res.json())
-        .then((data) => setTrendData(data.report.daily));
+      TREND_API.get().then((data) => setTrendData(data.report.daily));
       setIsLoading(true);
     };
 

@@ -19,9 +19,7 @@ export default function AdSetupGrid() {
 
   useEffect(() => {
     const getAdList = async () => {
-      ADLIST_API.get()
-        .then((res) => res.json())
-        .then((data) => setAdList(data.ads));
+      ADLIST_API.get().then((data) => setAdList(data.ads));
       setIsLoading(true);
     };
 
