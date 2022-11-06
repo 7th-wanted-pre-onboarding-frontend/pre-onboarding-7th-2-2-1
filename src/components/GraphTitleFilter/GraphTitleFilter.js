@@ -18,7 +18,7 @@ export default function GraphTitleFilter() {
     <Dropdown size='sm'>
       <StyledItemWrapper>
         <StyledTitleDot />
-        <Typography size='xlg' variant='default'>
+        <Typography size='lg' variant='default'>
           {selectedItem}
         </Typography>
       </StyledItemWrapper>

@@ -22,7 +22,6 @@ export default function GraphChart() {
           options={{
             chart: {
               type: 'line',
-              height: 350,
               toolbar: {
                 show: false
               },
