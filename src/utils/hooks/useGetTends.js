@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+import TREND_API from '../../api/trend';
 import { filterdTrends, trendState } from '../../store/trend';
 
 export default function useGetTends() {
@@ -10,10 +11,9 @@ export default function useGetTends() {
 
   useEffect(() => {
     const getTrendData = async () => {
-      const result = await fetch('http://localhost:3000/data/trendData.json');
-      const data = await result.json();
-
-      setTrendData(data.report.daily);
+      TREND_API.get()
+        .then((res) => res.json())
+        .then((data) => setTrendData(data.report.daily));
       setIsLoading(true);
     };
 

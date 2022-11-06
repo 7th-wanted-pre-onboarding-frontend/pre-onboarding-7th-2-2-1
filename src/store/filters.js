@@ -10,8 +10,8 @@ import {
 const initialState = {
   service: SERVICE_LIST[0].name,
   date: {
-    start: '2022-02-11',
-    end: '2022-02-20'
+    start: '2022-02-02',
+    end: '2022-04-20'
   },
   dashboardItem: {
     first: BANNER_LIST[0].title,

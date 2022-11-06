@@ -1,13 +1,10 @@
 import React from 'react';
 
-import {
-  StyledDashboard,
-  StyledDatePicker,
-  StyledTitle
-} from './DashboardPage.style';
+import { StyledDashboard, StyledTitle } from './DashboardPage.style';
 
 import Typography from '../../components/Typography/Typography';
 import AdStatusContainer from '../../components/AdStatusContainer/AdStatusContainer';
+import DashboardDataPicker from '../../components/DashboardDataPicker/DashboardDataPicker';
 
 export default function DashboardPage() {
   return (
@@ -16,7 +13,7 @@ export default function DashboardPage() {
         <Typography size='xxlg' variant='default'>
           대시보드
         </Typography>
-        <StyledDatePicker>ss</StyledDatePicker>
+        <DashboardDataPicker />
       </StyledTitle>
       <AdStatusContainer />
     </StyledDashboard>
