@@ -23,12 +23,11 @@ export const toStringByFormatting = (source, delimiter = '-') => {
   return [year, month, day].join(delimiter);
 };
 
-// export const getFormatDate = (date) => {
-//   const year = date.getFullYear();
-//   const month = 1 + date.getMonth();
-//   const day = date.getDate();
-//   return `${year}년 ${month}월 ${day}일 `;
-// };
+export const getFormatDate = (date) => {
+  const month = 1 + date.getMonth();
+  const day = date.getDate();
+  return `${month}월 ${day}일 `;
+};
 
 export const calculatePrevDate = (start) => {
   const startDate = new Date(start);
