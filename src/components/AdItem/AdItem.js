@@ -11,19 +11,11 @@ import {
   StyledAdItemColumn,
   StyledAdItemTitle
 } from './AdItem.style';
+import useCardInputHandler from '../../utils/hooks/useCardInputHandler';
 
 export default function AdItem(props) {
-  const { item, handleInputChange, target, setUpdateTarget } = props;
-
-  // const [adItemValue, setAdItemValue] = useState({
-  //   title: item.title,
-  //   status: item.status,
-  //   startData: item.startData,
-  //   budget: item.budget,
-  //   roas: item.report.roas,
-  //   amount: item.report.roas * item.report.cost,
-  //   cost: item.report.cost
-  // });
+  const { item, target, setUpdateTarget, adListValuesHanlder } = props;
+  const [inputValues, inputValuesHandler] = useCardInputHandler();
 
   const handleModToggle = () => {
     if (!target) {
@@ -31,13 +23,6 @@ export default function AdItem(props) {
     } else {
       setUpdateTarget(null);
     }
-  };
-
-  const onChange = (event) => {
-    const {
-      target: { value, name }
-    } = event;
-    handleInputChange({ value, name }, item.id);
   };
 
   return (
@@ -52,7 +37,11 @@ export default function AdItem(props) {
           </Typograpy>
         </StyledAdContent>
         {target ? (
-          <StlyedInput name='status' value={item.status} onChange={onChange} />
+          <StlyedInput
+            name='status'
+            defaultValue={item.status}
+            onChange={inputValuesHandler}
+          />
         ) : (
           <StyledAdContent>
             <Typograpy size='smBold'>{item.status}</Typograpy>
@@ -68,8 +57,8 @@ export default function AdItem(props) {
         {target ? (
           <StlyedInput
             name='startDate'
-            value={item.startDate}
-            onChange={onChange}
+            defaultValue={item.startDate}
+            onChange={inputValuesHandler}
           />
         ) : (
           <StyledAdContent>
@@ -84,7 +73,11 @@ export default function AdItem(props) {
           </Typograpy>
         </StyledAdContent>
         {target ? (
-          <StlyedInput name='budget' value={item.budget} onChange={onChange} />
+          <StlyedInput
+            name='budget'
+            defaultValue={item.budget}
+            onChange={inputValuesHandler}
+          />
         ) : (
           <StyledAdContent>
             <Typograpy size='smBold'>{item.budget}</Typograpy>
@@ -100,8 +93,8 @@ export default function AdItem(props) {
         {target ? (
           <StlyedInput
             name='roas'
-            value={item.report.roas}
-            onChange={onChange}
+            defaultValue={item.report.roas}
+            onChange={inputValuesHandler}
           />
         ) : (
           <StyledAdContent>
@@ -118,8 +111,8 @@ export default function AdItem(props) {
         {target ? (
           <StlyedInput
             name='convValue'
-            value={item.report.convValue}
-            onChange={onChange}
+            defaultValue={item.report.convValue}
+            onChange={inputValuesHandler}
           />
         ) : (
           <StyledAdContent>
@@ -136,8 +129,8 @@ export default function AdItem(props) {
         {target ? (
           <StlyedInput
             name='cost'
-            value={item.report.cost}
-            onChange={onChange}
+            defaultValue={item.report.cost}
+            onChange={inputValuesHandler}
           />
         ) : (
           <StyledAdContent>
@@ -149,6 +142,16 @@ export default function AdItem(props) {
         <Button onClick={handleModToggle}>
           <Typograpy size='lgBold'>수정하기</Typograpy>
         </Button>
+        {target && (
+          <Button
+            onClick={() => {
+              setUpdateTarget(null);
+              adListValuesHanlder(item.id, inputValues);
+            }}
+          >
+            <Typograpy size='lgBold'>완료</Typograpy>
+          </Button>
+        )}
       </StyledAdButtonWrapper>
     </StyledAdItem>
   );

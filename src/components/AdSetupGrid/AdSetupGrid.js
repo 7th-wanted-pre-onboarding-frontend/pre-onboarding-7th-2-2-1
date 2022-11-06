@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React, { useEffect, useState } from 'react';
 import { useRecoilState } from 'recoil';
 
@@ -13,7 +14,6 @@ export default function AdSetupGrid() {
   const [isLoading, setIsLoading] = useState(false);
   const [adList, setAdList] = useRecoilState(adListState);
   const [adListType] = useRecoilState(adListTypeState);
-  // eslint-disable-next-line no-unused-vars
   const [updateTarget, setUpdateTarget] = useState(null);
 
   useEffect(() => {
@@ -27,12 +27,23 @@ export default function AdSetupGrid() {
     getAdList();
   }, []);
 
-  const handleInputChange = ({ name, value }, targetId) => {
-    console.log('타겟id', targetId);
-    console.log(name, value);
-    // setAdList(prev=>prev.map(el))
+  const adListValuesHanlder = (targetId, valuse) => {
+    const newListArry = adList.map((obj) => {
+      if (obj.id === targetId) {
+        obj.budget = valuse.budget;
+        obj.report.convValue = valuse.convValue;
+        obj.report.cost = valuse.cost;
+        obj.report.roas = valuse.roas;
+        obj.status = valuse.status;
+        obj.title = valuse.title;
+        return obj;
+      }
+      return obj;
+    });
+
+    setAdList(newListArry);
   };
-  console.log(adList[0]);
+
   const filterList =
     adListType === ADLIST_TYPE.ALL
       ? adList
@@ -50,7 +61,7 @@ export default function AdSetupGrid() {
                 item={item}
                 target={target}
                 setUpdateTarget={setUpdateTarget}
-                handleInputChange={handleInputChange}
+                adListValuesHanlder={adListValuesHanlder}
               />
             );
           })}
