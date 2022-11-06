@@ -18,6 +18,7 @@ export default function DateList(props) {
           onClick={() => {
             setFilterState((prev) => ({
               ...prev,
+              scrollValue: 1,
               dashboardDate: name
             }));
             handleSelectItem(name);

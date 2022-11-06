@@ -14,12 +14,9 @@ import { StyledDropdownButton } from '../SidebarContainer/SidebarContainer.style
 import { StyledItemWrapper, StyledTitleDot } from './GraphTitleFilter.style';
 
 export default function GraphTitleFilter() {
-  const { selectedItem, handleSelectBoxToggle, handleSelectItem, isToggled } =
-    useDropdown({
-      title: 'ROAS',
-      name: 'roas'
-    });
   const [filter, setFilter] = useRecoilState(filterState);
+  const { selectedItem, handleSelectBoxToggle, handleSelectItem, isToggled } =
+    useDropdown(filter.dashboardItem.first);
 
   useEffect(() => {
     setFilter((state) => ({

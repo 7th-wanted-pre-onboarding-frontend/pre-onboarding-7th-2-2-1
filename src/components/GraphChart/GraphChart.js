@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Chart from 'react-apexcharts';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import styled from 'styled-components';
 import filterState from '../../store/filters';
 import { trendChartData } from '../../store/trend';
@@ -9,7 +9,6 @@ let timer = null;
 
 export default function GraphChart() {
   const chartData = useRecoilValue(trendChartData);
-  const { dashboardDate } = useRecoilValue(filterState);
 
   const ref = useRef(null);
   const scroll = useRef({
@@ -17,9 +16,7 @@ export default function GraphChart() {
     moving: false,
     clientX: null
   });
-  const [scrollX, setScrollX] = useState(1);
-
-  useEffect(() => setScrollX(1), [dashboardDate]);
+  const [filter, setFilter] = useRecoilState(filterState);
 
   useEffect(() => {
     let node = null;
@@ -32,8 +29,8 @@ export default function GraphChart() {
         const diff = e.clientX - scroll.current.clienX;
 
         timer = setTimeout(() => {
-          setScrollX((prev) => {
-            let next = prev;
+          setFilter((prev) => {
+            let next = prev.scrollValue;
             if (diff >= 0) {
               next += 7;
               if (next > chartData.category.length) {
@@ -45,7 +42,10 @@ export default function GraphChart() {
                 next = 1;
               }
             }
-            return next;
+            return {
+              ...prev,
+              scrollValue: next
+            };
           });
         }, 250);
       }
@@ -103,8 +103,8 @@ export default function GraphChart() {
               xaxis: {
                 type: 'string',
                 categories: chartData.category,
-                min: scrollX,
-                max: scrollX + 6
+                min: filter.scrollValue,
+                max: filter.scrollValue + 6
               },
               yaxis: [
                 {
