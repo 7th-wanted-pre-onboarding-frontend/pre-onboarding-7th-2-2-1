@@ -10,12 +10,11 @@ import adListTypeState from '../../store/adListType';
 import AdItem from '../AdItem/AdItem';
 
 export default function AdSetupGrid() {
-  const handleInputChange = ({ name, value }) => {
-    console.log(name, value);
-  };
   const [isLoading, setIsLoading] = useState(false);
   const [adList, setAdList] = useRecoilState(adListState);
   const [adListType] = useRecoilState(adListTypeState);
+  // eslint-disable-next-line no-unused-vars
+  const [updateTarget, setUpdateTarget] = useState(null);
 
   useEffect(() => {
     const getAdList = async () => {
@@ -27,22 +26,34 @@ export default function AdSetupGrid() {
 
     getAdList();
   }, []);
+
+  const handleInputChange = ({ name, value }, targetId) => {
+    console.log('타겟id', targetId);
+    console.log(name, value);
+    // setAdList(prev=>prev.map(el))
+  };
+  console.log(adList[0]);
   const filterList =
     adListType === ADLIST_TYPE.ALL
       ? adList
       : adList.filter((el) => el.status === adListType);
-  console.log(filterList);
+
   return (
     <StyledAdSetupGrid>
       {isLoading && (
         <>
-          {filterList.map((item) => (
-            <AdItem
-              key={item.id}
-              item={item}
-              handleInputChange={handleInputChange}
-            />
-          ))}
+          {filterList.map((item) => {
+            const target = updateTarget === item.id;
+            return (
+              <AdItem
+                key={item.id}
+                item={item}
+                target={target}
+                setUpdateTarget={setUpdateTarget}
+                handleInputChange={handleInputChange}
+              />
+            );
+          })}
         </>
       )}
     </StyledAdSetupGrid>

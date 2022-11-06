@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Typograpy from '../Typography/Typography';
 import Button from '../Button/Button';
@@ -13,8 +13,8 @@ import {
 } from './AdItem.style';
 
 export default function AdItem(props) {
-  const { item, handleInputChange } = props;
-  const [modToggle, setModToggle] = useState(false);
+  const { item, handleInputChange, target, setUpdateTarget } = props;
+
   // const [adItemValue, setAdItemValue] = useState({
   //   title: item.title,
   //   status: item.status,
@@ -26,14 +26,18 @@ export default function AdItem(props) {
   // });
 
   const handleModToggle = () => {
-    setModToggle((currentState) => !currentState);
+    if (!target) {
+      setUpdateTarget(item.id);
+    } else {
+      setUpdateTarget(null);
+    }
   };
 
   const onChange = (event) => {
     const {
       target: { value, name }
     } = event;
-    handleInputChange({ value, name });
+    handleInputChange({ value, name }, item.id);
   };
 
   return (
@@ -47,7 +51,7 @@ export default function AdItem(props) {
             상태
           </Typograpy>
         </StyledAdContent>
-        {modToggle ? (
+        {target ? (
           <StlyedInput name='status' value={item.status} onChange={onChange} />
         ) : (
           <StyledAdContent>
@@ -61,7 +65,7 @@ export default function AdItem(props) {
             광고 생성일
           </Typograpy>
         </StyledAdContent>
-        {modToggle ? (
+        {target ? (
           <StlyedInput
             name='startDate'
             value={item.startDate}
@@ -79,7 +83,7 @@ export default function AdItem(props) {
             일 희망 예산
           </Typograpy>
         </StyledAdContent>
-        {modToggle ? (
+        {target ? (
           <StlyedInput name='budget' value={item.budget} onChange={onChange} />
         ) : (
           <StyledAdContent>
@@ -93,7 +97,7 @@ export default function AdItem(props) {
             광고 수익률
           </Typograpy>
         </StyledAdContent>
-        {modToggle ? (
+        {target ? (
           <StlyedInput
             name='roas'
             value={item.report.roas}
@@ -111,17 +115,15 @@ export default function AdItem(props) {
             매출
           </Typograpy>
         </StyledAdContent>
-        {modToggle ? (
+        {target ? (
           <StlyedInput
-            name='amount'
-            value={item.report.roas * item.report.cost}
+            name='convValue'
+            value={item.report.convValue}
             onChange={onChange}
           />
         ) : (
           <StyledAdContent>
-            <Typograpy size='smBold'>
-              {item.report.roas * item.report.cost}
-            </Typograpy>
+            <Typograpy size='smBold'>{item.report.convValue}</Typograpy>
           </StyledAdContent>
         )}
       </StyledAdItemColumn>
@@ -131,7 +133,7 @@ export default function AdItem(props) {
             광고 비용
           </Typograpy>
         </StyledAdContent>
-        {modToggle ? (
+        {target ? (
           <StlyedInput
             name='cost'
             value={item.report.cost}
