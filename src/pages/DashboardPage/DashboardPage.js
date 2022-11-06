@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
-import { StyledDashboard, StyledTitle } from './DashboardPage.style';
+import {
+  StyledDashboard,
+  StyledTitle,
+  DaypickerContainer
+} from './DashboardPage.style';
 
 import Typography from '../../components/Typography/Typography';
 import AdStatusContainer from '../../components/AdStatusContainer/AdStatusContainer';
@@ -37,7 +40,7 @@ export default function DashboardPage() {
               formatData(selectedDay.from) === undefined
                 ? '기준일'
                 : formatData(selectedDay.from)
-            }~${
+            } ~ ${
               formatData(selectedDay.to) === undefined
                 ? '선택일'
                 : formatData(selectedDay.to)
@@ -50,5 +53,3 @@ export default function DashboardPage() {
     </StyledDashboard>
   );
 }
-
-const DaypickerContainer = styled.div``;
