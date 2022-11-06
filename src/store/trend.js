@@ -1,11 +1,18 @@
 import { atom, selector } from 'recoil';
 import {
   getDateDiff,
-  calculatePrevDate
+  calculatePrevDate,
+  getFormatDate
 } from '../utils/constants/usefulFunctions';
 import Trend from '../utils/types/trend';
 import TrendBanner from '../utils/types/trendBanner';
 import filterState from './filters';
+
+function filterDateTrends(trends, start, end) {
+  return trends
+    .filter(({ date }) => date >= start && date <= end)
+    .map((item) => new Trend(item));
+}
 
 function avgToTrends(trends, start, end, diffDate) {
   return trends
@@ -48,6 +55,52 @@ export const trendState = atom({
   default: []
 });
 
+export const trendChartData = selector({
+  key: 'trendChartData',
+  get: ({ get }) => {
+    const trendData = get(trendState);
+    const {
+      dashboardItem: { first, second },
+      date: { start, end }
+    } = get(filterState);
+
+    const series = [];
+
+    const seriesA = {
+      title: first.title,
+      name: first.title,
+      data: []
+    };
+
+    const category = [];
+    const filterdTrend = filterDateTrends(trendData, start, end);
+
+    filterdTrend.forEach((item) => {
+      seriesA.data.push(item[first.name]);
+    });
+
+    series.push(seriesA);
+
+    if (second.title !== '선택') {
+      const seriesB = {
+        title: second.title,
+        name: second.title,
+        data: []
+      };
+      filterdTrend.forEach((item) => {
+        seriesB.data.push(item[second.name]);
+      });
+      series.push(seriesB);
+    }
+
+    filterdTrend.forEach(({ date }) =>
+      category.push(getFormatDate(new Date(date)))
+    );
+
+    return { series, category };
+  }
+});
+
 export const filterdTrends = selector({
   key: 'filterdTrends',
   get: ({ get }) => {
@@ -56,6 +109,7 @@ export const filterdTrends = selector({
     const {
       date: { start, end }
     } = get(filterState);
+
     const diffDate = getDateDiff(start, end);
 
     const { prevEnd, prevStart, prevDiffDate } = calculatePrevDate(start);

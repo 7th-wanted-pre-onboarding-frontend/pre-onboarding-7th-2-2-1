@@ -1,11 +1,6 @@
 import { atom } from 'recoil';
 
-import {
-  BANNER_LIST,
-  DATE_LIST,
-  PROGRESS,
-  SERVICE_LIST
-} from '../utils/constants/constList';
+import { PROGRESS, SERVICE_LIST } from '../utils/constants/constList';
 
 const initialState = {
   service: SERVICE_LIST[0].name,
@@ -14,10 +9,16 @@ const initialState = {
     end: '2022-04-20'
   },
   dashboardItem: {
-    first: BANNER_LIST[0].title,
-    second: '선택'
+    first: {
+      title: 'ROAS',
+      name: 'roas'
+    },
+    second: {
+      title: '선택',
+      name: null
+    }
   },
-  dashboardDate: DATE_LIST[0].name,
+  dashboardDate: '일별',
   adSetup: PROGRESS[0].title
 };
 
