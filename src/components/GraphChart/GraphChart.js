@@ -2,12 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'react-apexcharts';
 import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+import filterState from '../../store/filters';
 import { trendChartData } from '../../store/trend';
 
 let timer = null;
 
 export default function GraphChart() {
   const chartData = useRecoilValue(trendChartData);
+  const { dashboardDate } = useRecoilValue(filterState);
 
   const ref = useRef(null);
   const scroll = useRef({
@@ -16,6 +18,8 @@ export default function GraphChart() {
     clientX: null
   });
   const [scrollX, setScrollX] = useState(1);
+
+  useEffect(() => setScrollX(1), [dashboardDate]);
 
   useEffect(() => {
     let node = null;
