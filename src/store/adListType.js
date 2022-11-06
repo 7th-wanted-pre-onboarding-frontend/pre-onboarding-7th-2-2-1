@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import ADLIST_TYPE from '../constants/ADLIST_TYPE';
+import ADLIST_TYPE from '../utils/constants/adlistType';
 
 const adListTypeState = atom({
   key: 'adListTypeState',

@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 
 import styled from 'styled-components';
 import ADLIST_API from '../../api/adList';
-import ADLIST_TYPE from '../../constants/ADLIST_TYPE';
+import ADLIST_TYPE from '../../utils/constants/adlistType';
 import adListState from '../../store/adList';
 import adListTypeState from '../../store/adListType';
 
@@ -31,6 +31,7 @@ export default function AdSetupGrid() {
     adListType === ADLIST_TYPE.ALL
       ? adList
       : adList.filter((el) => el.status === adListType);
+  console.log(filterList);
   return (
     <StyledAdSetupGrid>
       {isLoading && (
