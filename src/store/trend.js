@@ -2,7 +2,8 @@ import { atom, selector } from 'recoil';
 import {
   getDateDiff,
   calculatePrevDate,
-  getFormatDate
+  getFormatDate,
+  getWeekNumber
 } from '../utils/constants/usefulFunctions';
 import Trend from '../utils/types/trend';
 import TrendBanner from '../utils/types/trendBanner';
@@ -69,7 +70,7 @@ export const trendChartData = selector({
   key: 'trendChartData',
   get: ({ get }) => {
     const trendData = get(trendState);
-    const { dashboardItem, date } = get(filterState);
+    const { dashboardItem, date, dashboardDate } = get(filterState);
 
     if (date?.from === undefined || date?.to === undefined) {
       return undefined;
@@ -83,36 +84,91 @@ export const trendChartData = selector({
 
     const series = [];
 
-    const seriesA = {
+    let seriesA = {
       title: first.title,
       name: first.title,
-      data: []
+      data: [],
+      weekData: {}
     };
 
     const category = [];
     const filterdTrend = filterDateTrends(trendData, formatedFrom, formatedTo);
 
     filterdTrend.forEach((item) => {
-      seriesA.data.push(item[first.name]);
+      const data = item[first.name];
+      const weekOfMonth = getWeekNumber(new Date(item.date));
+      seriesA.data.push(data);
+      if (seriesA.weekData[weekOfMonth]) {
+        seriesA.weekData[weekOfMonth] = {
+          ...seriesA.weekData[weekOfMonth],
+          sum: seriesA.weekData[weekOfMonth].sum + data,
+          index: seriesA.weekData[weekOfMonth].index + 1
+        };
+      } else {
+        seriesA.weekData[weekOfMonth] = {
+          sum: data,
+          index: 1,
+          get avg() {
+            return Math.ceil(this.sum / this.index);
+          }
+        };
+      }
     });
+
+    if (dashboardDate === '주간') {
+      seriesA = {
+        ...seriesA,
+        data: Object.values(seriesA.weekData).map((item) => item.avg)
+      };
+    }
 
     series.push(seriesA);
 
     if (second.title !== '선택') {
-      const seriesB = {
+      let seriesB = {
         title: second.title,
         name: second.title,
-        data: []
+        data: [],
+        weekData: {}
       };
       filterdTrend.forEach((item) => {
-        seriesB.data.push(item[second.name]);
+        const data = item[second.name];
+        const weekOfMonth = getWeekNumber(new Date(item.date));
+        seriesB.data.push(data);
+
+        if (seriesB.weekData[weekOfMonth]) {
+          seriesB.weekData[weekOfMonth] = {
+            ...seriesB.weekData[weekOfMonth],
+            sum: seriesB.weekData[weekOfMonth].sum + data,
+            index: seriesB.weekData[weekOfMonth].index + 1
+          };
+        } else {
+          seriesB.weekData[weekOfMonth] = {
+            sum: data,
+            index: 1,
+            get avg() {
+              return Math.ceil(this.sum / this.index);
+            }
+          };
+        }
       });
+
+      if (dashboardDate === '주간') {
+        seriesB = {
+          ...seriesB,
+          data: Object.values(seriesB.weekData).map((item) => item.avg)
+        };
+      }
       series.push(seriesB);
     }
 
-    filterdTrend.forEach((data) =>
-      category.push(getFormatDate(new Date(data.date)))
-    );
+    if (dashboardDate === '주간') {
+      category.push(...Object.keys(seriesA.weekData));
+    } else {
+      filterdTrend.forEach((data) => {
+        category.push(getFormatDate(new Date(data.date)));
+      });
+    }
 
     return { series, category };
   }

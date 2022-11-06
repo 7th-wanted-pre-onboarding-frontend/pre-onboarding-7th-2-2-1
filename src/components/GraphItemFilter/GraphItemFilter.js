@@ -14,12 +14,9 @@ import { StyledDropdownButton } from '../SidebarContainer/SidebarContainer.style
 import { StyledItemWrapper, StyledItemDot } from './GraphItemFilter.style';
 
 export default function GraphItemFilter() {
-  const { selectedItem, handleSelectBoxToggle, handleSelectItem, isToggled } =
-    useDropdown({
-      title: '선택',
-      name: null
-    });
   const [filter, setFilter] = useRecoilState(filterState);
+  const { selectedItem, handleSelectBoxToggle, handleSelectItem, isToggled } =
+    useDropdown(filter.dashboardItem.second);
 
   useEffect(() => {
     setFilter((state) => ({
