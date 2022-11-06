@@ -22,7 +22,7 @@ export const BANNER_LIST = [
   {
     id: 5,
     title: '전환 수',
-    name: 'cov'
+    name: 'conv'
   },
   {
     id: 6,

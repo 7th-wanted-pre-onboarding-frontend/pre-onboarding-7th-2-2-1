@@ -10,7 +10,7 @@ export default function StatusBannerList() {
 
   return (
     <StyledStatusBannerList>
-      {isLoading && (
+      {isLoading && trends !== undefined && (
         <>
           {trends.map((item) => (
             <BannerItem key={item.id} item={item} />

@@ -1,16 +1,16 @@
 class TrendBanner {
   constructor({ imp, click, cost, roas, conv, amount, diffDate }) {
-    this.imp = imp;
-    this.click = click;
-    this.conv = conv;
-    this.cost = cost;
-    this.roas = this.#convertRoas(roas, diffDate);
-    this.amount = amount;
+    this.imp = this.#convertAvg(imp, diffDate);
+    this.click = this.#convertAvg(click, diffDate);
+    this.conv = this.#convertAvg(conv, diffDate);
+    this.cost = this.#convertAvg(cost, diffDate);
+    this.roas = this.#convertAvg(roas, diffDate);
+    this.amount = this.#convertAvg(amount, diffDate);
     this.diffDate = diffDate;
   }
 
-  #convertRoas(roas, diffDate) {
-    return Math.round(roas / diffDate) || 0;
+  #convertAvg(value, diffDate) {
+    return Math.round(value / diffDate) || 0;
   }
 
   getEntreis() {
