@@ -8,6 +8,7 @@ let timer = null;
 
 export default function GraphChart() {
   const chartData = useRecoilValue(trendChartData);
+
   const ref = useRef(null);
   const scroll = useRef({
     start: false,
@@ -15,8 +16,6 @@ export default function GraphChart() {
     clientX: null
   });
   const [scrollX, setScrollX] = useState(1);
-
-  console.log(chartData);
 
   useEffect(() => {
     let node = null;

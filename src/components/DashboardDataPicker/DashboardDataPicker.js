@@ -16,8 +16,6 @@ export default function DashboardDataPicker() {
       locale={ko}
       defaultMonth={new Date(2022, 1)}
       mode='range'
-      min={7}
-      max={7}
       selected={filters.date}
       onSelect={handleSetFilters}
     />
