@@ -13,7 +13,10 @@ function filterDateTrends(trends, from, to) {
   return trends
     .filter(
       ({ date }) =>
-        new Date(date) >= new Date(from) && new Date(date) <= new Date(to)
+        new Date(formatData(new Date(date))) >=
+          new Date(formatData(new Date(from))) &&
+        new Date(formatData(new Date(date))) <=
+          new Date(formatData(new Date(to)))
     )
     .map((item) => new Trend(item));
 }

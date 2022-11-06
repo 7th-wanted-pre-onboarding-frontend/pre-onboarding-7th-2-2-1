@@ -6,6 +6,7 @@ import { trendChartData } from '../../store/trend';
 
 export default function GraphChart() {
   const chartData = useRecoilValue(trendChartData);
+  console.log(chartData);
 
   return (
     <StyledGraphChart>
