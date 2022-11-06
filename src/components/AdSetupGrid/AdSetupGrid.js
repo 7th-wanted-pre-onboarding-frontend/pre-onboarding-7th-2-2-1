@@ -8,6 +8,7 @@ import adListState from '../../store/adList';
 import adListTypeState from '../../store/adListType';
 
 import AdItem from '../AdItem/AdItem';
+import AdListSkeleton from '../Skeleton/AdListSkeleton/AdListSkeleton';
 
 export default function AdSetupGrid() {
   const handleInputChange = ({ name, value }) => {
@@ -19,8 +20,10 @@ export default function AdSetupGrid() {
 
   useEffect(() => {
     const getAdList = async () => {
-      ADLIST_API.get().then((data) => setAdList(data.ads));
-      setIsLoading(true);
+      ADLIST_API.get().then((data) => {
+        setAdList(data.ads);
+        setIsLoading(true);
+      });
     };
 
     getAdList();
@@ -29,19 +32,24 @@ export default function AdSetupGrid() {
     adListType === ADLIST_TYPE.ALL
       ? adList
       : adList.filter((el) => el.status === adListType);
+
+  if (!isLoading) {
+    return (
+      <StyledAdSetupGrid>
+        <AdListSkeleton />
+      </StyledAdSetupGrid>
+    );
+  }
+
   return (
     <StyledAdSetupGrid>
-      {isLoading && (
-        <>
-          {filterList.map((item) => (
-            <AdItem
-              key={item.id}
-              item={item}
-              handleInputChange={handleInputChange}
-            />
-          ))}
-        </>
-      )}
+      {filterList.map((item) => (
+        <AdItem
+          key={item.id}
+          item={item}
+          handleInputChange={handleInputChange}
+        />
+      ))}
     </StyledAdSetupGrid>
   );
 }
