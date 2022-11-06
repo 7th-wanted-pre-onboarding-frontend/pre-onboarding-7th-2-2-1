@@ -1,22 +1,23 @@
 import { useEffect, useState } from 'react';
 
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import TREND_API from '../../api/trend';
-import { filterdTrends, trendState } from '../../store/trend';
+import { trendState } from '../../store/trend';
 
 export default function useGetTends() {
   const [isLoading, setIsLoading] = useState(false);
   const setTrendData = useSetRecoilState(trendState);
-  const trends = useRecoilValue(filterdTrends);
 
   useEffect(() => {
     const getTrendData = async () => {
-      TREND_API.get().then((data) => setTrendData(data.report.daily));
-      setIsLoading(true);
+      TREND_API.get().then((data) => {
+        setTrendData(data.report.daily);
+        setIsLoading(true);
+      });
     };
 
     getTrendData();
   }, []);
 
-  return { isLoading, trends };
+  return { isLoading };
 }
