@@ -8,8 +8,8 @@ import {
 } from 'react-router-dom';
 import Main from './layouts/Main/Main';
 
-import AdSetupPage from './pages/AdSetupPage';
-import DashboardPage from './pages/DashboardPage';
+import AdSetupPage from './pages/AdSetupPage/AdSetupPage';
+import DashboardPage from './pages/DashboardPage/DashboardPage';
 
 export default function AppRouter() {
   return (
