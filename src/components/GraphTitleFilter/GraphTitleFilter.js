@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import filterState from '../../store/filters';
+
 import useDropdown from '../../utils/hooks/useDropdown';
 
 import Dropdown from '../Dropdown/Dropdown';
@@ -12,14 +15,29 @@ import { StyledItemWrapper, StyledTitleDot } from './GraphTitleFilter.style';
 
 export default function GraphTitleFilter() {
   const { selectedItem, handleSelectBoxToggle, handleSelectItem, isToggled } =
-    useDropdown('ROAS');
+    useDropdown({
+      title: 'ROAS',
+      name: 'roas'
+    });
+  const [filter, setFilter] = useRecoilState(filterState);
 
+  useEffect(() => {
+    setFilter((state) => ({
+      ...state,
+      dashboardItem: {
+        ...state.dashboardItem,
+        first: {
+          ...selectedItem
+        }
+      }
+    }));
+  }, [selectedItem.title]);
   return (
     <Dropdown size='sm'>
       <StyledItemWrapper>
         <StyledTitleDot />
         <Typography size='lg' variant='default'>
-          {selectedItem}
+          {filter.dashboardItem.first.title}
         </Typography>
       </StyledItemWrapper>
       <Typography size='xlg' variant='default'>

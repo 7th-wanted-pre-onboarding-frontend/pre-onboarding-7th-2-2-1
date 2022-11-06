@@ -21,9 +21,10 @@ export const StyledTitle = styled.button`
   padding: 5px;
   border-bottom: 1px solid ${(props) => props.theme.border.default};
   transition: all 0.1s ease-in;
-  cursor: pointer;
+  ${(props) => !props.disabled && 'cursor: pointer;'}
 
   &:hover {
-    background-color: ${(props) => props.theme.bgColor.default};
+    ${(props) =>
+      !props.disabled && `background-color: ${props.theme.bgColor.default};`}
   }
 `;
