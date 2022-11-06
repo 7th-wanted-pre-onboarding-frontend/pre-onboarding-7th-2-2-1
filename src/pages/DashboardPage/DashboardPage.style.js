@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledDashboard = styled.div`
-  width: 100%;
+  width: calc(100vw - 320px);
   height: calc(100% - 80px);
   display: flex;
   flex-direction: column;

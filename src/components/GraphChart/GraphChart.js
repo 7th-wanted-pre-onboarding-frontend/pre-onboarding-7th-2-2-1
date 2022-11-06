@@ -10,44 +10,46 @@ export default function GraphChart() {
   return (
     <StyledGraphChart>
       <StyledChartWrapper>
-        <Chart
-          height='280px'
-          type='line'
-          series={chartData.series}
-          options={{
-            chart: {
-              type: 'line',
-              toolbar: {
-                show: false
-              },
-              zoom: {
-                enabled: false
-              }
-            },
-            stroke: {
-              curve: 'smooth'
-            },
-            xaxis: {
-              type: 'string',
-              categories: chartData.category
-            },
-            yaxis: [
-              {
-                title: {
-                  text: chartData.series[0].title
+        {chartData !== undefined && (
+          <Chart
+            height='280px'
+            type='line'
+            series={chartData.series}
+            options={{
+              chart: {
+                type: 'line',
+                toolbar: {
+                  show: false
+                },
+                zoom: {
+                  enabled: false
                 }
               },
-              {
-                show: chartData.series.length >= 2 && true,
-                opposite: true,
-                title: {
-                  text:
-                    chartData.series.length >= 2 && chartData.series[1].title
+              stroke: {
+                curve: 'smooth'
+              },
+              xaxis: {
+                type: 'string',
+                categories: chartData.category
+              },
+              yaxis: [
+                {
+                  title: {
+                    text: chartData.series[0].title
+                  }
+                },
+                {
+                  show: chartData.series.length >= 2 && true,
+                  opposite: true,
+                  title: {
+                    text:
+                      chartData.series.length >= 2 && chartData.series[1].title
+                  }
                 }
-              }
-            ]
-          }}
-        />
+              ]
+            }}
+          />
+        )}
       </StyledChartWrapper>
     </StyledGraphChart>
   );

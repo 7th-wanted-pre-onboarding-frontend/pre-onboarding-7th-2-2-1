@@ -13,7 +13,7 @@ import {
 } from './AdItem.style';
 
 export default function AdItem(props) {
-  const { item, handleInputChange } = props;
+  const { item } = props;
   const [modToggle, setModToggle] = useState(false);
   // const [adItemValue, setAdItemValue] = useState({
   //   title: item.title,
@@ -29,13 +29,6 @@ export default function AdItem(props) {
     setModToggle((currentState) => !currentState);
   };
 
-  const onChange = (event) => {
-    const {
-      target: { value, name }
-    } = event;
-    handleInputChange({ value, name });
-  };
-
   return (
     <StyledAdItem>
       <StyledAdItemTitle>
@@ -48,7 +41,7 @@ export default function AdItem(props) {
           </Typograpy>
         </StyledAdContent>
         {modToggle ? (
-          <StlyedInput name='status' value={item.status} onChange={onChange} />
+          <StlyedInput name='status' value={item.status} />
         ) : (
           <StyledAdContent>
             <Typograpy size='smBold'>{item.status}</Typograpy>
@@ -62,11 +55,7 @@ export default function AdItem(props) {
           </Typograpy>
         </StyledAdContent>
         {modToggle ? (
-          <StlyedInput
-            name='startDate'
-            value={item.startDate}
-            onChange={onChange}
-          />
+          <StlyedInput name='startDate' value={item.startDate} />
         ) : (
           <StyledAdContent>
             <Typograpy size='smBold'>{item.startDate}</Typograpy>
@@ -80,7 +69,7 @@ export default function AdItem(props) {
           </Typograpy>
         </StyledAdContent>
         {modToggle ? (
-          <StlyedInput name='budget' value={item.budget} onChange={onChange} />
+          <StlyedInput name='budget' value={item.budget} />
         ) : (
           <StyledAdContent>
             <Typograpy size='smBold'>{item.budget}</Typograpy>
@@ -94,11 +83,7 @@ export default function AdItem(props) {
           </Typograpy>
         </StyledAdContent>
         {modToggle ? (
-          <StlyedInput
-            name='roas'
-            value={item.report.roas}
-            onChange={onChange}
-          />
+          <StlyedInput name='roas' value={item.report.roas} />
         ) : (
           <StyledAdContent>
             <Typograpy size='smBold'>{item.report.roas}</Typograpy>
@@ -115,7 +100,6 @@ export default function AdItem(props) {
           <StlyedInput
             name='amount'
             value={item.report.roas * item.report.cost}
-            onChange={onChange}
           />
         ) : (
           <StyledAdContent>
@@ -132,11 +116,7 @@ export default function AdItem(props) {
           </Typograpy>
         </StyledAdContent>
         {modToggle ? (
-          <StlyedInput
-            name='cost'
-            value={item.report.cost}
-            onChange={onChange}
-          />
+          <StlyedInput name='cost' value={item.report.cost} />
         ) : (
           <StyledAdContent>
             <Typograpy size='smBold'>{item.report.cost}</Typograpy>

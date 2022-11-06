@@ -10,7 +10,7 @@ export default function useDateFilter() {
       ...state,
       date: {
         ...state.date,
-        start: toStringByFormatting(date)
+        from: toStringByFormatting(date)
       }
     }));
   };
@@ -20,7 +20,7 @@ export default function useDateFilter() {
       ...state,
       date: {
         ...state.date,
-        end: toStringByFormatting(date)
+        to: toStringByFormatting(date)
       }
     }));
   };

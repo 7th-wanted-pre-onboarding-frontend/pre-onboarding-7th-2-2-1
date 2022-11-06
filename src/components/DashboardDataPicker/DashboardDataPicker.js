@@ -1,48 +1,25 @@
 import React from 'react';
-
-import styled from 'styled-components';
-
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import useDateFilter from '../../utils/hooks/useDateFilter';
+import { useRecoilState } from 'recoil';
+import { DayPicker } from 'react-day-picker';
+import ko from 'date-fns/locale/ko';
+import filterState from '../../store/filters';
+import './DayPicker.css';
 
 export default function DashboardDataPicker() {
-  const { filters, setStartDate, setEndDate } = useDateFilter();
+  const [filters, setFilters] = useRecoilState(filterState);
+  const handleSetFilters = (data) => {
+    setFilters({ ...filters, date: data });
+  };
 
   return (
-    <StyledDatePicker>
-      <StyledDateInput
-        selected={new Date(filters.date.start)}
-        selectsStart
-        endDate={new Date(filters.date.end)}
-        onChange={(date) => setStartDate(date)}
-      />
-      <div>~</div>
-      <StyledDateInput
-        selected={new Date(filters.date.end)}
-        selectsEnd
-        startDate={new Date(filters.date.start)}
-        onChange={(date) => setEndDate(date)}
-      />
-    </StyledDatePicker>
+    <DayPicker
+      locale={ko}
+      defaultMonth={new Date(2022, 1)}
+      mode='range'
+      min={7}
+      max={7}
+      selected={filters.date}
+      onSelect={handleSetFilters}
+    />
   );
 }
-
-const StyledDatePicker = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const StyledDateInput = styled(DatePicker)`
-  border: none;
-  width: 80px;
-  background-color: ${(props) => props.theme.bnColor};
-  border-radius: 10px;
-  padding: 5px;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 16.41px;
-  cursor: pointer;
-`;
