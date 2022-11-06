@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export const StyledSidebarContainer = styled.div`
   width: 100%;
-  height: 984px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -90,6 +90,7 @@ export const StyledGuide = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  padding-bottom: 100px;
 `;
 
 export const StyledGuideCard = styled.button`

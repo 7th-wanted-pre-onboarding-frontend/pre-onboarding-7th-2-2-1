@@ -9,8 +9,9 @@ const StyledDropdown = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   border-radius: 10px;
-  border: 1px solid ${(props) => props.theme.border.button};
+  border: var(--dropdown-border, none);
 `;
 
 export default StyledDropdown;
