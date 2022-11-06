@@ -9,7 +9,6 @@ import BannerItem from '../BannerItem/BannerItem';
 
 export default function StatusBannerList() {
   const trends = useRecoilValue(filterdTrends);
-  console.log(trends);
 
   return (
     <StyledStatusBannerList>
