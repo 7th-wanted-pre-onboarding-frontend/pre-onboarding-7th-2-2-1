@@ -12,6 +12,9 @@ import {
   StyledAdItemTitle
 } from './AdItem.style';
 import useCardInputHandler from '../../utils/hooks/useCardInputHandler';
+import ADLIST_STATUS_NAME from '../../utils/constants/adlistStatusName';
+import convertDateFormat from '../../utils/makeData/convertDateFormat';
+import tenThousandFormatting from '../../utils/makeData/tenThousandFormatting';
 
 export default function AdItem(props) {
   const { item, target, setUpdateTarget, adListValuesHanlder } = props;
@@ -44,7 +47,9 @@ export default function AdItem(props) {
           />
         ) : (
           <StyledAdContent>
-            <Typograpy size='smBold'>{item.status}</Typograpy>
+            <Typograpy size='smBold'>
+              {ADLIST_STATUS_NAME[item.status]}
+            </Typograpy>
           </StyledAdContent>
         )}
       </StyledAdItemColumn>
@@ -62,7 +67,9 @@ export default function AdItem(props) {
           />
         ) : (
           <StyledAdContent>
-            <Typograpy size='smBold'>{item.startDate}</Typograpy>
+            <Typograpy size='smBold'>
+              {convertDateFormat(item.startDate)}
+            </Typograpy>
           </StyledAdContent>
         )}
       </StyledAdItemColumn>
@@ -80,7 +87,9 @@ export default function AdItem(props) {
           />
         ) : (
           <StyledAdContent>
-            <Typograpy size='smBold'>{item.budget}</Typograpy>
+            <Typograpy size='smBold'>
+              {tenThousandFormatting(item.budget)}
+            </Typograpy>
           </StyledAdContent>
         )}
       </StyledAdItemColumn>
@@ -98,7 +107,7 @@ export default function AdItem(props) {
           />
         ) : (
           <StyledAdContent>
-            <Typograpy size='smBold'>{item.report.roas}</Typograpy>
+            <Typograpy size='smBold'>{item.report.roas}%</Typograpy>
           </StyledAdContent>
         )}
       </StyledAdItemColumn>
@@ -116,7 +125,9 @@ export default function AdItem(props) {
           />
         ) : (
           <StyledAdContent>
-            <Typograpy size='smBold'>{item.report.convValue}</Typograpy>
+            <Typograpy size='smBold'>
+              {tenThousandFormatting(item.report.convValue)}
+            </Typograpy>
           </StyledAdContent>
         )}
       </StyledAdItemColumn>
@@ -134,7 +145,9 @@ export default function AdItem(props) {
           />
         ) : (
           <StyledAdContent>
-            <Typograpy size='smBold'>{item.report.cost}</Typograpy>
+            <Typograpy size='smBold'>
+              {tenThousandFormatting(item.report.cost)}
+            </Typograpy>
           </StyledAdContent>
         )}
       </StyledAdItemColumn>
