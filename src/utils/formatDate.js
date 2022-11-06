@@ -1,6 +1,6 @@
 export default function formatData(date) {
   if (date === undefined || date === '') {
-    return {};
+    return undefined;
   }
   const YEAR = date.getFullYear();
   const MONTH = date.getMonth();
