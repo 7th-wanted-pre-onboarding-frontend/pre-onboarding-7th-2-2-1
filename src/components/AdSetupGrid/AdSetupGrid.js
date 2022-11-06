@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 import styled from 'styled-components';
-
-import { AD_LIST } from '../../utils/constants/constList';
+import ADLIST_API from '../../api/adList';
+import adListState from '../../store/adList';
 
 import AdItem from '../AdItem/AdItem';
 
@@ -10,16 +11,33 @@ export default function AdSetupGrid() {
   const handleInputChange = ({ name, value }) => {
     console.log(name, value);
   };
+  const [isLoading, setIsLoading] = useState(false);
+  const [adList, setAdList] = useRecoilState(adListState);
+
+  useEffect(() => {
+    const getAdList = async () => {
+      ADLIST_API.get()
+        .then((res) => res.json())
+        .then((data) => setAdList(data.ads));
+      setIsLoading(true);
+    };
+
+    getAdList();
+  }, []);
 
   return (
     <StyledAdSetupGrid>
-      {AD_LIST.map((item) => (
-        <AdItem
-          key={item.id}
-          item={item}
-          handleInputChange={handleInputChange}
-        />
-      ))}
+      {isLoading && (
+        <>
+          {adList.map((item) => (
+            <AdItem
+              key={item.id}
+              item={item}
+              handleInputChange={handleInputChange}
+            />
+          ))}
+        </>
+      )}
     </StyledAdSetupGrid>
   );
 }
