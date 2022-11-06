@@ -3,13 +3,16 @@ import { useRecoilState } from 'recoil';
 
 import styled from 'styled-components';
 import ADLIST_API from '../../api/adList';
+import ADLIST_TYPE from '../../constants/ADLIST_TYPE';
 import adListState from '../../store/adList';
+import adListTypeState from '../../store/adListType';
 
 import AdItem from '../AdItem/AdItem';
 
 export default function AdSetupGrid() {
   const [isLoading, setIsLoading] = useState(false);
   const [adList, setAdList] = useRecoilState(adListState);
+  const [adListType] = useRecoilState(adListTypeState);
 
   useEffect(() => {
     const getAdList = async () => {
@@ -21,12 +24,15 @@ export default function AdSetupGrid() {
 
     getAdList();
   }, []);
-
+  const filterList =
+    adListType === ADLIST_TYPE.ALL
+      ? adList
+      : adList.filter((el) => el.status === adListType);
   return (
     <StyledAdSetupGrid>
       {isLoading && (
         <>
-          {adList.map((item) => (
+          {filterList.map((item) => (
             <AdItem key={item.id} item={item} />
           ))}
         </>

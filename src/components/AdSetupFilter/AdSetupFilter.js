@@ -15,6 +15,7 @@ import { StyledDropdownButton } from '../SidebarContainer/SidebarContainer.style
 export default function AdSetupFilter() {
   const { selectedItem, handleSelectBoxToggle, handleSelectItem, isToggled } =
     useDropdown('전체 광고');
+  console.log('값 확인 : ', PROGRESS);
 
   return (
     <Dropdown size='sm'>

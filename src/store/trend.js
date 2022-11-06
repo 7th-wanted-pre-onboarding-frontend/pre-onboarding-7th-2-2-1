@@ -140,21 +140,16 @@ export const filterdTrends = selector({
     const { prevEnd, prevStart, prevDiffDate } =
       calculatePrevDate(formatedFrom);
 
-    const previoustrend = avgToTrends(
+    const previousTrend = avgToTrends(
       trendData,
       prevStart,
       prevEnd,
       prevDiffDate
     );
-    const trendObject = avgToTrends(
-      trendData,
-      formatedFrom,
-      formatedTo,
-      diffDate
-    );
+    const trend = avgToTrends(trendData, formatedFrom, formatedTo, diffDate);
 
-    const avgPrevTrend = new TrendBanner(previoustrend).getEntreis();
-    const avgTrend = new TrendBanner(trendObject).getEntreis();
+    const avgPrevTrend = new TrendBanner(previousTrend).getEntreis();
+    const avgTrend = new TrendBanner(trend).getEntreis();
 
     const trends = BANNER_TITLE.map((title, idx) => ({
       id: idx,
@@ -162,7 +157,7 @@ export const filterdTrends = selector({
       value: avgTrend[idx],
       roc: {
         inc_flag: avgTrend[idx] - avgPrevTrend[idx] > 0,
-        value: avgTrend[idx] - avgPrevTrend[idx]
+        value: Math.round(avgTrend[idx] - avgPrevTrend[idx])
       }
     }));
 
