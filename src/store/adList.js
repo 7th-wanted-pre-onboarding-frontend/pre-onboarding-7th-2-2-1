@@ -1,8 +1,11 @@
 import { atom } from 'recoil';
 
-const adListState = atom({
+export const adListState = atom({
   key: 'adListState',
   default: []
 });
 
-export default adListState;
+export const isLoading = atom({
+  key: 'isLoading',
+  default: false
+});

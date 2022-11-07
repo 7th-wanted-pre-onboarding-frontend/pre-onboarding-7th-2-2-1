@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   StyledDashboard,
   StyledTitle,
   DaypickerContainer,
   StyledDatePicker
 } from './DashboardPage.style';
+import { isLoading } from '../../store/adList';
 
 import Typography from '../../components/Typography/Typography';
 import AdStatusContainer from '../../components/AdStatusContainer/AdStatusContainer';
@@ -17,6 +18,7 @@ import convertDateToKo from '../../utils/makeData/convertDateToKo';
 
 export default function DashboardPage() {
   const [isToggle, setIsToggle] = useState(false);
+  const setIsLoading = useSetRecoilState(isLoading);
   const filters = useRecoilValue(filterState);
   const [selectedDay, setSelectedDay] = useState({
     from: filters.date?.from,
@@ -28,6 +30,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     setSelectedDay({ from: filters.date?.from, to: filters.date?.to });
+    setIsLoading(false);
   }, [filters]);
 
   return (

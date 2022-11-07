@@ -1,31 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import React, { useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import styled from 'styled-components';
-import ADLIST_API from '../../api/adList';
 import ADLIST_TYPE from '../../utils/constants/adlistType';
-import adListState from '../../store/adList';
+import { adListState, isLoading } from '../../store/adList';
 import adListTypeState from '../../store/adListType';
 
 import AdItem from '../AdItem/AdItem';
 import AdListSkeleton from '../Skeleton/AdListSkeleton/AdListSkeleton';
 
 export default function AdSetupGrid() {
-  const [isLoading, setIsLoading] = useState(false);
+  const isLoadings = useRecoilValue(isLoading);
   const [adList, setAdList] = useRecoilState(adListState);
   const [adListType] = useRecoilState(adListTypeState);
   const [updateTarget, setUpdateTarget] = useState(null);
 
-  useEffect(() => {
-    const getAdList = async () => {
-      ADLIST_API.get().then((data) => {
-        setAdList(data.ads);
-        setIsLoading(true);
-      });
-    };
-
-    getAdList();
-  }, []);
+  console.log(adList);
 
   const adListValuesHanlder = (targetId, valuse) => {
     const newListArry = adList.map(
@@ -56,7 +46,7 @@ export default function AdSetupGrid() {
       ? adList
       : adList.filter((el) => el.status === adListType);
 
-  if (!isLoading) {
+  if (!isLoadings) {
     return (
       <StyledAdSetupGrid>
         <AdListSkeleton />
