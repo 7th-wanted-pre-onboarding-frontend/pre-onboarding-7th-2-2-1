@@ -67,12 +67,9 @@ npm start
 
 ## Projects
 
-각자 과제 구현 후 Github Discuussion을 통한 토론 결과로 best practice를 산출하여 리팩토링하는 방식을 채택했습니다.
-
-1. Discussion을 통한 Best base code 채택
-2. 기능 별 Best practice 선정
-3. Base code를 Best practice 코드로 리팩토링
-4. PR은 3명 이상으로부터 approved 되어야 merge 가능
+1. 기능 별 Best practice 선정
+2. Base code를 Best practice 코드로 리팩토링
+3. PR은 3명 이상으로부터 approved 되어야 merge 가능
 
 > ### 코드 및 커밋 컨벤션은 Git Hooks와 husky를 사용해 자동화했습니다.
 
@@ -111,7 +108,7 @@ https://github.com/7th-wanted-pre-onboarding-frontend/pre-onboarding-7th-2-2-1/b
 - 과제의 요구 사항인 두번째 레이어를 선택했을 경우 우측에 새로운 `Y-axis`가 생성되야 합니다.
 - 라이브러리의 그래프 디자인이 페이지의 테마와 어울려야 합니다.
 
-때문에 그래프 차프 라이브러리 중 `Apexcharts`를 **BestPractice**로 선정했습니다.
+때문에 그래프 차트 라이브러리 중 `Apexcharts`를 **BestPractice**로 선정했습니다.
 
 https://github.com/7th-wanted-pre-onboarding-frontend/pre-onboarding-7th-2-2-1/blob/c82453bca1eb33a210bb546c8631789ec71d3d7e/src/components/GraphChart/GraphChart.js#L1-L144
 
