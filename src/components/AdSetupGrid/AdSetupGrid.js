@@ -55,26 +55,29 @@ export default function AdSetupGrid() {
     adListType === ADLIST_TYPE.ALL
       ? adList
       : adList.filter((el) => el.status === adListType);
-      
+
+  if (!isLoading) {
+    return (
+      <StyledAdSetupGrid>
+        <AdListSkeleton />
+      </StyledAdSetupGrid>
+    );
+  }
+
   return (
     <StyledAdSetupGrid>
-      {isLoading && (
-        <>
-          {filterList.map((item) => {
-            const target = updateTarget === item.id;
-            return (
-              <AdItem
-                key={item.id}
-                item={item}
-                target={target}
-                setUpdateTarget={setUpdateTarget}
-                adListValuesHanlder={adListValuesHanlder}
-              />
-            );
-          })}
-        </>
-      )}
-
+      {filterList.map((item) => {
+        const target = updateTarget === item.id;
+        return (
+          <AdItem
+            key={item.id}
+            item={item}
+            target={target}
+            setUpdateTarget={setUpdateTarget}
+            adListValuesHanlder={adListValuesHanlder}
+          />
+        );
+      })}
     </StyledAdSetupGrid>
   );
 }
