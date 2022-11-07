@@ -1,4 +1,6 @@
 import React from 'react';
+import { useRecoilValue } from 'recoil';
+import filterState from '../../store/filters';
 import useDropdown from '../../utils/hooks/useDropdown';
 
 import Dropdown from '../Dropdown/Dropdown';
@@ -7,7 +9,8 @@ import { DATE_LIST } from '../../utils/constants/constList';
 import { Select } from '../Select/Select.style';
 
 export default function GraphDateFilter() {
-  const { selectedItem, handleEventItem } = useDropdown('주간');
+  const { dashboardDate } = useRecoilValue(filterState);
+  const { selectedItem, handleEventItem } = useDropdown(dashboardDate);
 
   return (
     <Dropdown size='mmd'>

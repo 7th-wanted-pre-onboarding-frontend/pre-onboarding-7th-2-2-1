@@ -7,7 +7,7 @@ export default function ServiceList(props) {
   const { handleEventItem, selectedItem } = props;
 
   return (
-    <Select onChange={handleEventItem} value={selectedItem}>
+    <Select onChange={() => handleEventItem} value={selectedItem}>
       {SERVICE_LIST.map(({ id, name }) => (
         <option key={id} value={name}>
           {name}

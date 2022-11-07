@@ -19,7 +19,7 @@ export default function AdSetupFilter() {
     isToggled,
     testRef
   } = useDropdown('전체 광고');
-  console.log('is Toggled inside Ad', isToggled);
+
   return (
     <Dropdown size='sm'>
       <StyledAdItemWrapper>

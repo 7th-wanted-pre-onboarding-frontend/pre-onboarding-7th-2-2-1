@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { MdArrowDropUp } from '@react-icons/all-files/md/MdArrowDropUp';
-import { MdArrowDropDown } from '@react-icons/all-files/md/MdArrowDropDown';
 import {
   StyledBanner,
   StyledBannerLeft,
@@ -9,6 +7,8 @@ import {
 } from './BannerItem.style';
 
 import Typography from '../Typography/Typography';
+import formatBannerData from '../../utils/formatBannerData';
+import Icons from '../Icons';
 
 export default function BannerItem(props) {
   const { item } = props;
@@ -19,18 +19,16 @@ export default function BannerItem(props) {
           {item.title}
         </Typography>
         <Typography size='xlg' variant='default'>
-          {item.value}
+          {formatBannerData(item.title, item.value)}
         </Typography>
       </StyledBannerLeft>
       <StyledBannerRight>
-        {item.roc.inc_flag ? (
-          <MdArrowDropUp color='red' />
-        ) : (
-          <MdArrowDropDown color='green' />
-        )}
-        <Typography size='md' variant='label'>
-          {item.roc.value}
-        </Typography>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+          {item.roc.inc_flag ? <Icons.PolygonRed /> : <Icons.PolygonGreen />}
+          <Typography size='md' variant='label'>
+            {formatBannerData(item.title, item.roc.value)}
+          </Typography>
+        </div>
       </StyledBannerRight>
     </StyledBanner>
   );
