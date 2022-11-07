@@ -59,8 +59,8 @@ export const StyledLink = styled(Link)`
   padding: 20px;
   border-radius: 10px;
   transition: all 0.1s ease-in;
+  color: ${(props) => props.theme.color.default};
   cursor: pointer;
-
   &:visited {
     color: inherit;
   }
