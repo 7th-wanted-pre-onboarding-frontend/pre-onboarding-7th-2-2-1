@@ -6,7 +6,6 @@ const StyledStatusBannerList = styled.div`
   column-gap: 22px;
   row-gap: 20px;
   width: 100%;
-  margin-bottom: 42px;
   padding: 40px;
 `;
 
