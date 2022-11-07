@@ -18,16 +18,28 @@ export const StyledTitle = styled.div`
 `;
 
 export const DaypickerContainer = styled.div`
-  margin-right: 30px;
+  display: flex;
+  align-items: center;
   font-size: 14px;
+  font-weight: 500;
+  color: ${(props) => props.theme.color.default};
   letter-spacing: 0.5px;
-  padding: 10px 20px;
-  border: 1px solid #d1d8dc;
-  background-color: white;
+  padding: 10px 0;
+  border: none;
   border-radius: 5px;
 
   &:hover {
     color: #586cf5;
     cursor: pointer;
+
+    svg {
+      path {
+        fill: #586cf5;
+      }
+    }
   }
+`;
+
+export const StyledDatePicker = styled.div`
+  position: relative;
 `;

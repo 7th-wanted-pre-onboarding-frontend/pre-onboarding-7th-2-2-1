@@ -11,7 +11,6 @@ export const StyledAdSetup = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100%;
   border-radius: 20px;
   background-color: ${(props) => props.theme.bnColor.default};
   overflow: scroll;

@@ -22,6 +22,7 @@ export const StyledAdItemTitle = styled.div`
 
 export const StyledAdItemColumn = styled.div`
   width: 100%;
+  height: 40px;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -35,7 +36,6 @@ export const StyledAdContent = styled.div`
 
 export const StlyedInput = styled.input`
   width: 50%;
-  height: 100%;
   font-size: 12px;
   font-weight: 700;
   line-height: 14.06px;

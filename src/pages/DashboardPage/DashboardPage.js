@@ -4,14 +4,16 @@ import { useRecoilValue } from 'recoil';
 import {
   StyledDashboard,
   StyledTitle,
-  DaypickerContainer
+  DaypickerContainer,
+  StyledDatePicker
 } from './DashboardPage.style';
 
 import Typography from '../../components/Typography/Typography';
 import AdStatusContainer from '../../components/AdStatusContainer/AdStatusContainer';
 import DashboardDataPicker from '../../components/DashboardDataPicker/DashboardDataPicker';
-import formatData from '../../utils/formatDate';
 import filterState from '../../store/filters';
+import Icons from '../../components/Icons';
+import convertDateToKo from '../../utils/makeData/convertDateToKo';
 
 export default function DashboardPage() {
   const [isToggle, setIsToggle] = useState(false);
@@ -34,20 +36,21 @@ export default function DashboardPage() {
         <Typography size='xxlg' variant='default'>
           대시보드
         </Typography>
-        <div style={{ position: 'relative' }}>
+        <StyledDatePicker>
           <DaypickerContainer onClick={handleToggle}>
             {`${
-              formatData(selectedDay.from) === undefined
+              convertDateToKo(selectedDay.from) === undefined
                 ? '기준일'
-                : formatData(selectedDay.from)
+                : convertDateToKo(selectedDay.from)
             } ~ ${
-              formatData(selectedDay.to) === undefined
+              convertDateToKo(selectedDay.to) === undefined
                 ? '선택일'
-                : formatData(selectedDay.to)
+                : convertDateToKo(selectedDay.to)
             }`}
+            <Icons.ArrowDown />
           </DaypickerContainer>
           {isToggle && <DashboardDataPicker setIsToggle={setIsToggle} />}
-        </div>
+        </StyledDatePicker>
       </StyledTitle>
       <AdStatusContainer />
     </StyledDashboard>
