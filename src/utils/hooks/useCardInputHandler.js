@@ -12,7 +12,13 @@ export default function useCardInputHandler() {
   });
   const inputValuesHandler = (e) => {
     const { name, value } = e.target;
-    if (name === 'startDate') {
+    if (name === 'status') {
+      if (value === '진행중') {
+        setInputValues((prev) => ({ ...prev, [name]: 'active' }));
+      } else if (value === '중단됨') {
+        setInputValues((prev) => ({ ...prev, [name]: 'ended' }));
+      }
+    } else if (name === 'startDate') {
       setInputValues((prev) => ({ ...prev, [name]: formatDate(value) }));
     } else {
       setInputValues((prev) => ({ ...prev, [name]: value }));

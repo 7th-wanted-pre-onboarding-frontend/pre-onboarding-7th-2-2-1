@@ -31,6 +31,7 @@ export default function AdSetupGrid() {
       ({ id, budget, report, status, title, endDate, startDate }) => {
         if (id === targetId) {
           return {
+            id,
             budget: valuse.budget || budget,
             report: {
               convValue: valuse.convValue || report.convValue,
@@ -43,10 +44,9 @@ export default function AdSetupGrid() {
             startDate: valuse.startDate || startDate
           };
         }
-        return { budget, report, status, title, endDate, startDate };
+        return { id, budget, report, status, title, endDate, startDate };
       }
     );
-    console.log('newList', newListArry);
     setAdList(newListArry);
   };
 

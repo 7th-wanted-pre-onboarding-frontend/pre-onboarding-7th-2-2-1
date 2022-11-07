@@ -1,5 +1,4 @@
 import React from 'react';
-
 import Typograpy from '../Typography/Typography';
 import Button from '../Button/Button';
 
@@ -27,7 +26,7 @@ export default function AdItem(props) {
       setUpdateTarget(null);
     }
   };
-
+  const statusValue = item.status === 'active' ? '진행중' : '중단됨';
   return (
     <StyledAdItem>
       <StyledAdItemTitle>
@@ -42,7 +41,7 @@ export default function AdItem(props) {
         {target ? (
           <StlyedInput
             name='status'
-            defaultValue={item.status}
+            defaultValue={statusValue}
             onChange={inputValuesHandler}
           />
         ) : (
