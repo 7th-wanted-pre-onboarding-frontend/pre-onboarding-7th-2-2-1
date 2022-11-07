@@ -68,6 +68,9 @@ export const StyledLink = styled(Link)`
   &:hover {
     color: ${(props) => props.theme.color.accent};
     background-color: ${(props) => props.theme.border.default};
+    svg path {
+      fill: ${(props) => props.theme.color.accent};
+    }
   }
 
   ${(props) =>
@@ -75,10 +78,15 @@ export const StyledLink = styled(Link)`
     `
     color: ${props.theme.color.accent} !important;
     background-color: ${props.theme.border.default};
+    svg path {
+      fill: ${props.theme.color.accent};
+    }
     `}
 `;
 
 export const StyledLinkText = styled.span`
+  display: inline-block;
+  width: 100%;
   font-size: 16px;
   font-weight: 700;
   line-height: 18.75px;
@@ -88,9 +96,8 @@ export const StyledGuide = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 40px;
-  padding-bottom: 100px;
+  padding: 0 40px 100px 40px;
 `;
 
 export const StyledGuideCard = styled.button`
@@ -107,7 +114,8 @@ export const StyledGuideCard = styled.button`
 export const StyledGuideText = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 7px;
+  padding: ${(props) => props.padding || 0};
 `;
 
 export const StyledTermLink = styled.a`

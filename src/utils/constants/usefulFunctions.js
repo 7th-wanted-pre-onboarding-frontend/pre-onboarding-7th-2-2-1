@@ -4,7 +4,7 @@ export const getDateDiff = (d1, d2) => {
 
   const diffDate = date1.getTime() - date2.getTime();
 
-  return Math.abs(diffDate / (1000 * 60 * 60 * 24)); // 밀리세컨 * 초 * 분 * 시 = 일
+  return Math.abs(diffDate / (1000 * 60 * 60 * 24)) || 1;
 };
 
 function leftPad(value) {
@@ -41,4 +41,12 @@ export const calculatePrevDate = (start) => {
   );
 
   return { prevStart, prevEnd, prevDiffDate: 3 };
+};
+
+export const getWeekNumber = (dateFrom = new Date()) => {
+  const currentDate = dateFrom.getDate();
+  const month = dateFrom.getMonth() + 1;
+  const startOfMonth = new Date(dateFrom.setDate(1));
+  const weekDay = startOfMonth.getDay();
+  return `${month}월 ${Math.floor((weekDay - 1 + currentDate) / 7) + 1}주`;
 };

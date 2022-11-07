@@ -8,6 +8,7 @@ import adListState from '../../store/adList';
 import adListTypeState from '../../store/adListType';
 
 import AdItem from '../AdItem/AdItem';
+import AdListSkeleton from '../Skeleton/AdListSkeleton/AdListSkeleton';
 
 export default function AdSetupGrid() {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,10 +18,10 @@ export default function AdSetupGrid() {
 
   useEffect(() => {
     const getAdList = async () => {
-      ADLIST_API.get()
-        .then((res) => res.json())
-        .then((data) => setAdList(data.ads));
-      setIsLoading(true);
+      ADLIST_API.get().then((data) => {
+        setAdList(data.ads);
+        setIsLoading(true);
+      });
     };
 
     getAdList();
@@ -54,7 +55,7 @@ export default function AdSetupGrid() {
     adListType === ADLIST_TYPE.ALL
       ? adList
       : adList.filter((el) => el.status === adListType);
-
+      
   return (
     <StyledAdSetupGrid>
       {isLoading && (
@@ -73,6 +74,7 @@ export default function AdSetupGrid() {
           })}
         </>
       )}
+
     </StyledAdSetupGrid>
   );
 }

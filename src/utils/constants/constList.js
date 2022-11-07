@@ -22,7 +22,7 @@ export const BANNER_LIST = [
   {
     id: 5,
     title: '전환 수',
-    name: 'cov'
+    name: 'conv'
   },
   {
     id: 6,
@@ -49,7 +49,7 @@ export const DATE_LIST = [
   },
   {
     id: 2,
-    name: '야간'
+    name: '일별'
   }
 ];
 

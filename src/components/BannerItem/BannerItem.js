@@ -9,6 +9,7 @@ import {
 } from './BannerItem.style';
 
 import Typography from '../Typography/Typography';
+import formatBannerData from '../../utils/formatBannerData';
 
 export default function BannerItem(props) {
   const { item } = props;
@@ -19,7 +20,7 @@ export default function BannerItem(props) {
           {item.title}
         </Typography>
         <Typography size='xlg' variant='default'>
-          {item.value}
+          {formatBannerData(item.title, item.value)}
         </Typography>
       </StyledBannerLeft>
       <StyledBannerRight>
@@ -29,7 +30,7 @@ export default function BannerItem(props) {
           <MdArrowDropDown color='green' />
         )}
         <Typography size='md' variant='label'>
-          {item.roc.value}
+          {formatBannerData(item.title, item.roc.value)}
         </Typography>
       </StyledBannerRight>
     </StyledBanner>

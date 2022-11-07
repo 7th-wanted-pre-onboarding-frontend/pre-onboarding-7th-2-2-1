@@ -2,12 +2,10 @@ import styled from 'styled-components';
 
 const StyledStatusBannerList = styled.div`
   display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 22px;
+  row-gap: 20px;
   width: 100%;
-  place-items: center;
-  align-items: center;
-  grid-template-columns: repeat(3, minmax(250px, auto));
-  grid-auto-rows: minmax(80px, auto);
-  gap: 20px;
   padding: 40px;
 `;
 
