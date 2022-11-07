@@ -12,7 +12,6 @@ import {
   StyledSidebarContainer,
   StyledLogoWrapper,
   StyledSidebarItem,
-  StyledDropdownButton,
   StyledLinkWrapper,
   StyledLink,
   StyledGuide,
@@ -28,8 +27,7 @@ import Typography from '../Typography/Typography';
 import Dropdown from '../Dropdown/Dropdown';
 
 export default function SidebarContainer() {
-  const { selectedItem, isToggled, handleSelectBoxToggle, handleSelectItem } =
-    useDropdown('매드업');
+  const { selectedItem, handleEventItem } = useDropdown('매드업');
   const { pathname } = useLocation();
 
   function isActivePath(path, activepath) {
@@ -49,13 +47,10 @@ export default function SidebarContainer() {
             </Typography>
           </label>
           <Dropdown id='dropdown' size='md'>
-            <Typography size='xlg' variant='default'>
-              {selectedItem}
-            </Typography>
-            <Typography size='xlg' variant='default'>
-              <StyledDropdownButton onClick={handleSelectBoxToggle} />
-            </Typography>
-            {isToggled && <ServiceList handleSelectItem={handleSelectItem} />}
+            <ServiceList
+              selectedItem={selectedItem}
+              handleEventItem={handleEventItem}
+            />
           </Dropdown>
         </StyledSidebarItem>
         <StyledSidebarItem>

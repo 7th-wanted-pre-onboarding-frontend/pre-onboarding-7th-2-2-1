@@ -35,6 +35,7 @@ module.exports = {
     'react/jsx-no-useless-fragment': 'off',
     'react/no-array-index-key': 'off',
     'no-console': 'off',
+    'import/prefer-default-export': 'off',
     'jsx-a11y/label-has-associated-control': [
       2,
       { labelAttributes: ['htmlFor'] }

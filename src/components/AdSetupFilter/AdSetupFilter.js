@@ -1,5 +1,4 @@
 import React from 'react';
-
 import styled from 'styled-components';
 
 import useDropdown from '../../utils/hooks/useDropdown';
@@ -13,10 +12,14 @@ import { PROGRESS } from '../../utils/constants/constList';
 import { StyledDropdownButton } from '../SidebarContainer/SidebarContainer.style';
 
 export default function AdSetupFilter() {
-  const { selectedItem, handleSelectBoxToggle, handleSelectItem, isToggled } =
-    useDropdown('전체 광고');
-  console.log('값 확인 : ', PROGRESS);
-
+  const {
+    selectedItem,
+    handleSelectBoxToggle,
+    handleSelectItem,
+    isToggled,
+    testRef
+  } = useDropdown('전체 광고');
+  console.log('is Toggled inside Ad', isToggled);
   return (
     <Dropdown size='sm'>
       <StyledAdItemWrapper>
@@ -24,7 +27,7 @@ export default function AdSetupFilter() {
           {selectedItem}
         </Typography>
       </StyledAdItemWrapper>
-      <Typography size='xlg' variant='default'>
+      <Typography size='xlg' variant='default' ref={testRef}>
         <StyledDropdownButton onClick={handleSelectBoxToggle} />
       </Typography>
       {isToggled && (
@@ -33,7 +36,6 @@ export default function AdSetupFilter() {
     </Dropdown>
   );
 }
-
 const StyledAdItemWrapper = styled.div`
   display: flex;
   flex-direction: row;
