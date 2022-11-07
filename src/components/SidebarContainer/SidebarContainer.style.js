@@ -7,7 +7,6 @@ export const StyledSidebarContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
 `;
 
@@ -15,7 +14,6 @@ export const StyledContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
   align-items: center;
   gap: 53px;
 `;
@@ -97,7 +95,7 @@ export const StyledGuide = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
-  padding: 0 40px 100px 40px;
+  padding: 260px 40px 100px 40px;
 `;
 
 export const StyledGuideCard = styled.button`

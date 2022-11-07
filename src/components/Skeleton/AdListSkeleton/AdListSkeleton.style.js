@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const StyledAdListSkeleton = styled.div`
   width: 100%;
-  height: 100%;
+  height: 420px;
   background-color: #e0e3e3;
   position: relative;
   overflow: hidden;

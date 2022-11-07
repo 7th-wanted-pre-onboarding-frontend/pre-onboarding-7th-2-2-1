@@ -216,7 +216,7 @@ export const filterdTrends = selector({
       value: avgTrend[idx],
       roc: {
         inc_flag: avgTrend[idx] - avgPrevTrend[idx] > 0,
-        value: Math.round(avgTrend[idx] - avgPrevTrend[idx])
+        value: Math.abs(Math.round(avgTrend[idx] - avgPrevTrend[idx]))
       }
     }));
 

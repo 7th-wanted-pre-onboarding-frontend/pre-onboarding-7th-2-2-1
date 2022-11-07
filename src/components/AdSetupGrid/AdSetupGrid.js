@@ -89,7 +89,6 @@ const StyledAdSetupGrid = styled.div`
   place-items: center;
   align-items: center;
   grid-template-columns: repeat(3, minmax(280px, auto));
-  grid-auto-rows: minmax(200px, auto);
   gap: 20px;
   padding: 0px 40px 40px 40px;
 `;
