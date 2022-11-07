@@ -42,11 +42,11 @@ export default function DashboardPage() {
         <StyledDatePicker>
           <DaypickerContainer onClick={handleToggle}>
             {`${
-              convertDateToKo(selectedDay.from) === undefined
+              selectedDay.from === undefined
                 ? '기준일'
                 : convertDateToKo(selectedDay.from)
             } ~ ${
-              convertDateToKo(selectedDay.to) === undefined
+              selectedDay.to === undefined
                 ? '선택일'
                 : convertDateToKo(selectedDay.to)
             }`}
