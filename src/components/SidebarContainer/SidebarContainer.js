@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 import { useLocation } from 'react-router-dom';
 import useDropdown from '../../utils/hooks/useDropdown';
 
@@ -7,7 +8,6 @@ import {
   StyledSidebarContainer,
   StyledLogoWrapper,
   StyledSidebarItem,
-  StyledDropdownButton,
   StyledLinkWrapper,
   StyledLink,
   StyledGuide,
@@ -15,17 +15,25 @@ import {
   StyledGuideCard,
   StyledGuideText,
   StyledLinkText,
-  StyledTermLink
+  StyledTermLink,
+  StyledDropdownButton
 } from './SidebarContainer.style';
 
 import ServiceList from '../ServiceList/ServiceList';
 import Typography from '../Typography/Typography';
 import Dropdown from '../Dropdown/Dropdown';
 import Icons from '../Icons';
+import filterState from '../../store/filters';
 
 export default function SidebarContainer() {
-  const { selectedItem, isToggled, handleSelectBoxToggle, handleSelectItem } =
-    useDropdown('매드업');
+  const { service } = useRecoilValue(filterState);
+  const {
+    selectedItem,
+    handleSelectBoxToggle,
+    isToggled,
+    handleSelectItem,
+    ref
+  } = useDropdown(service);
   const { pathname } = useLocation();
 
   function isActivePath(path, activepath) {
@@ -44,7 +52,7 @@ export default function SidebarContainer() {
               서비스
             </Typography>
           </label>
-          <Dropdown id='dropdown' size='md'>
+          <Dropdown id='dropdown' size='md' ref={ref}>
             <Typography size='xlg' variant='default'>
               {selectedItem}
             </Typography>

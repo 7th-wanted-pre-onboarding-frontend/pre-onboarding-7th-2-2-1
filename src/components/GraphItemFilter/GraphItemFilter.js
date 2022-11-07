@@ -15,8 +15,13 @@ import { StyledItemWrapper, StyledItemDot } from './GraphItemFilter.style';
 
 export default function GraphItemFilter() {
   const [filter, setFilter] = useRecoilState(filterState);
-  const { selectedItem, handleSelectBoxToggle, handleSelectItem, isToggled } =
-    useDropdown(filter.dashboardItem.second);
+  const {
+    selectedItem,
+    handleSelectBoxToggle,
+    handleSelectItem,
+    isToggled,
+    ref
+  } = useDropdown(filter.dashboardItem.second);
 
   useEffect(() => {
     setFilter((state) => ({
@@ -31,7 +36,7 @@ export default function GraphItemFilter() {
   }, [selectedItem.title]);
 
   return (
-    <Dropdown size='sm'>
+    <Dropdown size='sm' ref={ref}>
       <StyledItemWrapper>
         <StyledItemDot />
         <Typography size='lg' variant='default'>

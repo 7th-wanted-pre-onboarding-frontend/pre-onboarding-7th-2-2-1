@@ -4,12 +4,21 @@ import StyledDropdown from './Dropdown.style';
 
 import SIZES from './Dropdown.variant';
 
-export default function Dropdown(props) {
-  const { children, size } = props;
+function Dropdown({ children, size }, ref) {
   const sizestyle = SIZES[size];
 
-  return <StyledDropdown sizestyle={sizestyle}>{children}</StyledDropdown>;
+  return (
+    <StyledDropdown
+      sizestyle={sizestyle}
+      ref={ref}
+      className='dropdown-container'
+    >
+      {children}
+    </StyledDropdown>
+  );
 }
+
+export default React.forwardRef(Dropdown);
 
 Dropdown.defaultProps = {
   size: SIZES.md

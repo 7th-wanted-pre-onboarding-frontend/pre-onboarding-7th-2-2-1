@@ -4,21 +4,26 @@ import filterState from '../../store/filters';
 import useDropdown from '../../utils/hooks/useDropdown';
 
 import Dropdown from '../Dropdown/Dropdown';
-import Typography from '../Typography/Typography';
-import DateList from '../DateList/DateList';
 
 import { DATE_LIST } from '../../utils/constants/constList';
+import Typography from '../Typography/Typography';
+import DateList from '../DateList/DateList';
 
 import { StyledDropdownButton } from '../SidebarContainer/SidebarContainer.style';
 import { StyledItemWrapper } from './GraphDateFilter.style';
 
 export default function GraphDateFilter() {
   const { dashboardDate } = useRecoilValue(filterState);
-  const { selectedItem, handleSelectBoxToggle, handleSelectItem, isToggled } =
-    useDropdown(dashboardDate);
+  const {
+    selectedItem,
+    handleSelectBoxToggle,
+    handleSelectItem,
+    isToggled,
+    ref
+  } = useDropdown(dashboardDate);
 
   return (
-    <Dropdown size='mmd'>
+    <Dropdown size='mmd' ref={ref}>
       <StyledItemWrapper>
         <Typography size='lg' variant='default'>
           {selectedItem}

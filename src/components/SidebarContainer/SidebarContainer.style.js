@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { RiArrowDropDownLine } from '@react-icons/all-files/ri/RiArrowDropDownLine';
 import { Link } from 'react-router-dom';
 
 export const StyledSidebarContainer = styled.div`
@@ -36,9 +35,12 @@ export const StyledSidebarItem = styled.div`
   padding-right: 40px;
 `;
 
-export const StyledDropdownButton = styled(RiArrowDropDownLine)`
-  font-size: 20px;
-  font-weight: 700;
+export const StyledDropdownButton = styled.div`
+  width: 24px;
+  height: 24px;
+  background-image: url('./images/icons/arrowDown.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
   cursor: pointer;
 `;
 

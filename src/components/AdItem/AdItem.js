@@ -151,10 +151,7 @@ export default function AdItem(props) {
         )}
       </StyledAdItemColumn>
       <StyledAdButtonWrapper>
-        <Button onClick={handleModToggle}>
-          <Typograpy size='lgBold'>수정하기</Typograpy>
-        </Button>
-        {target && (
+        {target ? (
           <Button
             onClick={() => {
               setUpdateTarget(null);
@@ -162,6 +159,10 @@ export default function AdItem(props) {
             }}
           >
             <Typograpy size='lgBold'>완료</Typograpy>
+          </Button>
+        ) : (
+          <Button onClick={handleModToggle}>
+            <Typograpy size='lgBold'>수정하기</Typograpy>
           </Button>
         )}
       </StyledAdButtonWrapper>

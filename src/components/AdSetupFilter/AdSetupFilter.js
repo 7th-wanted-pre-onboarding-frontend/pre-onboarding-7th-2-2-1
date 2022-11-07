@@ -1,5 +1,4 @@
 import React from 'react';
-
 import styled from 'styled-components';
 
 import useDropdown from '../../utils/hooks/useDropdown';
@@ -13,18 +12,28 @@ import { PROGRESS } from '../../utils/constants/constList';
 import { StyledDropdownButton } from '../SidebarContainer/SidebarContainer.style';
 
 export default function AdSetupFilter() {
-  const { selectedItem, handleSelectBoxToggle, handleSelectItem, isToggled } =
-    useDropdown('전체 광고');
+  const {
+    selectedItem,
+    handleSelectBoxToggle,
+    handleSelectItem,
+    isToggled,
+    ref
+  } = useDropdown('전체 광고');
 
   return (
-    <Dropdown size='sm'>
+    <Dropdown size='sm' ref={ref}>
       <StyledAdItemWrapper>
         <Typography size='lg' variant='default'>
           {selectedItem}
         </Typography>
       </StyledAdItemWrapper>
       <Typography size='xlg' variant='default'>
-        <StyledDropdownButton onClick={handleSelectBoxToggle} />
+        <StyledDropdownButton
+          onClick={() => {
+            console.log('asnfklankvlsanvklavn saklv!!!!');
+            handleSelectBoxToggle();
+          }}
+        />
       </Typography>
       {isToggled && (
         <AdItemList list={PROGRESS} handleSelectItem={handleSelectItem} />
@@ -32,7 +41,6 @@ export default function AdSetupFilter() {
     </Dropdown>
   );
 }
-
 const StyledAdItemWrapper = styled.div`
   display: flex;
   flex-direction: row;
