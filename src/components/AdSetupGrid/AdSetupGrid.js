@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 
 import styled from 'styled-components';
 import ADLIST_API from '../../api/adList';
-import ADLIST_TYPE from '../../constants/ADLIST_TYPE';
+import ADLIST_TYPE from '../../utils/constants/adlistType';
 import adListState from '../../store/adList';
 import adListTypeState from '../../store/adListType';
 
@@ -14,6 +14,7 @@ export default function AdSetupGrid() {
   const [isLoading, setIsLoading] = useState(false);
   const [adList, setAdList] = useRecoilState(adListState);
   const [adListType] = useRecoilState(adListTypeState);
+  const [updateTarget, setUpdateTarget] = useState(null);
 
   useEffect(() => {
     const getAdList = async () => {
@@ -25,24 +26,55 @@ export default function AdSetupGrid() {
 
     getAdList();
   }, []);
+
+  const adListValuesHanlder = (targetId, valuse) => {
+    const newListArry = adList.map(
+      ({ id, budget, report, status, title, endDate, startDate }) => {
+        if (id === targetId) {
+          return {
+            id,
+            budget: valuse.budget || budget,
+            report: {
+              convValue: valuse.convValue || report.convValue,
+              cost: valuse.cost || report.cost,
+              roas: valuse.roas || report.roas
+            },
+            status: valuse.status || status,
+            title,
+            endDate,
+            startDate: valuse.startDate || startDate
+          };
+        }
+        return { id, budget, report, status, title, endDate, startDate };
+      }
+    );
+    setAdList(newListArry);
+  };
+
   const filterList =
     adListType === ADLIST_TYPE.ALL
       ? adList
       : adList.filter((el) => el.status === adListType);
-
-  if (!isLoading) {
-    return (
-      <StyledAdSetupGrid>
-        <AdListSkeleton />
-      </StyledAdSetupGrid>
-    );
-  }
-
+      
   return (
     <StyledAdSetupGrid>
-      {filterList.map((item) => (
-        <AdItem key={item.id} item={item} />
-      ))}
+      {isLoading && (
+        <>
+          {filterList.map((item) => {
+            const target = updateTarget === item.id;
+            return (
+              <AdItem
+                key={item.id}
+                item={item}
+                target={target}
+                setUpdateTarget={setUpdateTarget}
+                adListValuesHanlder={adListValuesHanlder}
+              />
+            );
+          })}
+        </>
+      )}
+
     </StyledAdSetupGrid>
   );
 }

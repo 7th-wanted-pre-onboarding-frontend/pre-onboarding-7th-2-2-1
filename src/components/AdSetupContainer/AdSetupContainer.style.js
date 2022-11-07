@@ -14,4 +14,8 @@ export const StyledAdSetup = styled.div`
   height: 100%;
   border-radius: 20px;
   background-color: ${(props) => props.theme.bnColor.default};
+  overflow: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
