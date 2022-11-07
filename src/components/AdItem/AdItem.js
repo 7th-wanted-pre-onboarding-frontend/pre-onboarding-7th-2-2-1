@@ -62,7 +62,7 @@ export default function AdItem(props) {
         {target ? (
           <StlyedInput
             name='startDate'
-            defaultValue={item.startDate}
+            defaultValue={convertDateFormat(item.startDate)}
             onChange={inputValuesHandler}
           />
         ) : (

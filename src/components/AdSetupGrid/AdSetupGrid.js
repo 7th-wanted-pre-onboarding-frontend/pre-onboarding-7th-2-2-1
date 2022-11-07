@@ -33,19 +33,20 @@ export default function AdSetupGrid() {
           return {
             budget: valuse.budget || budget,
             report: {
-              convValue: valuse.report.convValue || report.convValue,
-              cost: valuse.report.cost || report.cost,
-              roas: valuse.report.roas || report.roas
+              convValue: valuse.convValue || report.convValue,
+              cost: valuse.cost || report.cost,
+              roas: valuse.roas || report.roas
             },
             status: valuse.status || status,
             title,
             endDate,
-            startDate
+            startDate: valuse.startDate || startDate
           };
         }
         return { budget, report, status, title, endDate, startDate };
       }
     );
+    console.log('newList', newListArry);
     setAdList(newListArry);
   };
 
