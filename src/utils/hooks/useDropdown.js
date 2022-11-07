@@ -5,7 +5,6 @@ export default function useDropdown(initailState) {
   const [selectedItem, setSelectedItem] = useState(initailState);
 
   const handleSelectBoxToggle = () => {
-    console.log('----');
     setIsToggled((currentState) => !currentState);
   };
 
@@ -14,34 +13,29 @@ export default function useDropdown(initailState) {
     setIsToggled((currentState) => !currentState);
   };
 
-  const testRef = useRef();
-  console.log(testRef);
+  const ref = useRef();
 
   useEffect(() => {
     const onClick = (e) => {
-      console.log('isToggled', isToggled);
-      console.log('cu', testRef.current);
-      console.log('--', testRef.current.contains(e.target));
-      if (
-        isToggled &&
-        (testRef.current !== null || !testRef.current.contains(e.target))
-      ) {
-        console.log(testRef);
+      const { target } = e;
+      const isInDropDown = target.closest('.dropdown-container');
+
+      if (!isInDropDown && isToggled) {
         setIsToggled(false);
       }
     };
 
-    if (isToggled) {
+    if (ref.current) {
       window.addEventListener('click', onClick);
     }
 
     return () => {
       window.removeEventListener('click', onClick);
     };
-  }, [testRef.current]);
+  }, [ref.current, isToggled]);
 
   return {
-    testRef,
+    ref,
     isToggled,
     selectedItem,
     handleSelectBoxToggle,

@@ -46,4 +46,7 @@ export const StlyedInput = styled.input`
 export const StyledAdButtonWrapper = styled.div`
   width: 100%;
   padding-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `;

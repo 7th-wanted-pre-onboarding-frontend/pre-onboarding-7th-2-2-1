@@ -1,19 +1,28 @@
 import React from 'react';
 
+import { StyledService, StyledServiceList } from './ServiceList.style';
+
 import { SERVICE_LIST } from '../../utils/constants/constList';
-import { Select } from '../Select/Select.style';
+
+import Typography from '../Typography/Typography';
 
 export default function ServiceList(props) {
-  const { handleEventItem, selectedItem } = props;
+  const { handleSelectItem } = props;
 
   return (
-    <Select onChange={() => handleEventItem} value={selectedItem}>
+    <StyledServiceList>
       {SERVICE_LIST.map(({ id, name }) => (
-        <option key={id} value={name}>
-          {name}
-        </option>
+        <StyledService
+          key={id}
+          type='button'
+          onClick={() => handleSelectItem(name)}
+        >
+          <Typography size='lg'>{name}</Typography>
+        </StyledService>
       ))}
-      <option size='lg'>+ 서비스 추가하기</option>
-    </Select>
+      <StyledService>
+        <Typography size='lg'>+ 서비스 추가하기</Typography>
+      </StyledService>
+    </StyledServiceList>
   );
 }

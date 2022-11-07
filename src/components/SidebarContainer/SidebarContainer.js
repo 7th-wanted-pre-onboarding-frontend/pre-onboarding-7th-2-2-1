@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 import { useLocation } from 'react-router-dom';
 import useDropdown from '../../utils/hooks/useDropdown';
 
@@ -14,16 +15,25 @@ import {
   StyledGuideCard,
   StyledGuideText,
   StyledLinkText,
-  StyledTermLink
+  StyledTermLink,
+  StyledDropdownButton
 } from './SidebarContainer.style';
 
 import ServiceList from '../ServiceList/ServiceList';
 import Typography from '../Typography/Typography';
 import Dropdown from '../Dropdown/Dropdown';
 import Icons from '../Icons';
+import filterState from '../../store/filters';
 
 export default function SidebarContainer() {
-  const { selectedItem, handleEventItem } = useDropdown('매드업');
+  const { service } = useRecoilValue(filterState);
+  const {
+    selectedItem,
+    handleSelectBoxToggle,
+    isToggled,
+    handleSelectItem,
+    ref
+  } = useDropdown(service);
   const { pathname } = useLocation();
 
   function isActivePath(path, activepath) {
@@ -42,11 +52,14 @@ export default function SidebarContainer() {
               서비스
             </Typography>
           </label>
-          <Dropdown id='dropdown' size='md'>
-            <ServiceList
-              selectedItem={selectedItem}
-              handleEventItem={handleEventItem}
-            />
+          <Dropdown id='dropdown' size='md' ref={ref}>
+            <Typography size='xlg' variant='default'>
+              {selectedItem}
+            </Typography>
+            <Typography size='xlg' variant='default'>
+              <StyledDropdownButton onClick={handleSelectBoxToggle} />
+            </Typography>
+            {isToggled && <ServiceList handleSelectItem={handleSelectItem} />}
           </Dropdown>
         </StyledSidebarItem>
         <StyledSidebarItem>

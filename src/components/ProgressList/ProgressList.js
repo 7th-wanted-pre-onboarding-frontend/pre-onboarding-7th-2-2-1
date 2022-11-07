@@ -17,6 +17,7 @@ export default function ProgressList(props) {
           key={id}
           type='button'
           onClick={() => {
+            console.log('[12121212] ProgressList');
             handleSelectItem(title);
             setAdListType(status);
           }}

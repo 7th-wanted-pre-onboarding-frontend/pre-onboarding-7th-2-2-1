@@ -17,18 +17,23 @@ export default function AdSetupFilter() {
     handleSelectBoxToggle,
     handleSelectItem,
     isToggled,
-    testRef
+    ref
   } = useDropdown('전체 광고');
 
   return (
-    <Dropdown size='sm'>
+    <Dropdown size='sm' ref={ref}>
       <StyledAdItemWrapper>
         <Typography size='lg' variant='default'>
           {selectedItem}
         </Typography>
       </StyledAdItemWrapper>
-      <Typography size='xlg' variant='default' ref={testRef}>
-        <StyledDropdownButton onClick={handleSelectBoxToggle} />
+      <Typography size='xlg' variant='default'>
+        <StyledDropdownButton
+          onClick={() => {
+            console.log('asnfklankvlsanvklavn saklv!!!!');
+            handleSelectBoxToggle();
+          }}
+        />
       </Typography>
       {isToggled && (
         <AdItemList list={PROGRESS} handleSelectItem={handleSelectItem} />

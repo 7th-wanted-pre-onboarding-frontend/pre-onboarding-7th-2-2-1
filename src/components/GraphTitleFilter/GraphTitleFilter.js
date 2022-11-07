@@ -16,7 +16,7 @@ import { StyledItemWrapper, StyledTitleDot } from './GraphTitleFilter.style';
 export default function GraphTitleFilter() {
   const [filter, setFilter] = useRecoilState(filterState);
   const {
-    testRef,
+    ref,
     selectedItem,
     handleSelectBoxToggle,
     handleSelectItem,
@@ -36,8 +36,8 @@ export default function GraphTitleFilter() {
   }, [selectedItem.title]);
 
   return (
-    <Dropdown size='sm'>
-      <StyledItemWrapper ref={testRef}>
+    <Dropdown size='sm' ref={ref}>
+      <StyledItemWrapper>
         <StyledTitleDot />
         <Typography size='lg' variant='default'>
           {filter.dashboardItem.first.title}

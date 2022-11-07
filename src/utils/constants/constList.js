@@ -35,10 +35,6 @@ export const SERVICE_LIST = [
   {
     id: 1,
     name: '매드업'
-  },
-  {
-    id: 2,
-    name: '김정맨'
   }
 ];
 
