@@ -1,9 +1,4 @@
 import React from 'react';
-
-import { AiOutlineDashboard } from '@react-icons/all-files/ai/AiOutlineDashboard';
-import { AiOutlineLineChart } from '@react-icons/all-files/ai/AiOutlineLineChart';
-import { AiOutlineBulb } from '@react-icons/all-files/ai/AiOutlineBulb';
-
 import { useLocation } from 'react-router-dom';
 import useDropdown from '../../utils/hooks/useDropdown';
 
@@ -26,6 +21,7 @@ import {
 import ServiceList from '../ServiceList/ServiceList';
 import Typography from '../Typography/Typography';
 import Dropdown from '../Dropdown/Dropdown';
+import Icons from '../Icons';
 
 export default function SidebarContainer() {
   const { selectedItem, isToggled, handleSelectBoxToggle, handleSelectItem } =
@@ -69,14 +65,14 @@ export default function SidebarContainer() {
               to='/dashboard'
               active={isActivePath(pathname, '/dashboard')}
             >
-              <AiOutlineDashboard />
+              <Icons.DashBoard />
               <StyledLinkText>대시보드</StyledLinkText>
             </StyledLink>
             <StyledLink
               to='/adsetup'
               active={isActivePath(pathname, '/adsetup')}
             >
-              <AiOutlineLineChart />
+              <Icons.ManageAd />
               <StyledLinkText>광고관리</StyledLinkText>
             </StyledLink>
           </StyledLinkWrapper>
@@ -84,7 +80,7 @@ export default function SidebarContainer() {
       </StyledContentWrapper>
       <StyledGuide>
         <StyledGuideCard>
-          <AiOutlineBulb size='40px' />
+          <Icons.Guide />
           <StyledGuideText>
             <Typography size='xlg' variant='default'>
               레버 이용 가이드
@@ -94,8 +90,10 @@ export default function SidebarContainer() {
             </Typography>
           </StyledGuideText>
         </StyledGuideCard>
-        <StyledGuideText>
-          <Typography size='md'>레버는 함께 만들어갑니다.</Typography>
+        <StyledGuideText padding='0 0 0 20px'>
+          <Typography size='md' variant='label'>
+            레버는 함께 만들어갑니다.
+          </Typography>
           <StyledTermLink href='/#'>이용약관</StyledTermLink>
         </StyledGuideText>
       </StyledGuide>
